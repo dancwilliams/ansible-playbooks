@@ -1,0 +1,23 @@
+---
+
+  - name: Build Configuration Files
+    hosts: iosxe
+    connection: local
+    gather_facts: no
+
+    tasks:
+      - name: BUILD CONFIGS
+        template: src=templates/csr-ospf.j2 dest=configs/{{ inventory_hostname }}.cfg
+        tags: build
+
+      - name: PUSH CONFIGS
+        napalm_install_config:
+          hostname={{ inventory_hostname }}
+          username={{ un }}
+          password={{ pwd }}
+          dev_os={{ os }}
+          config_file=configs/{{ inventory_hostname }}.cfg
+          commit_changes=true
+          replace_config=false
+          get_diffs=false
+        tags: push

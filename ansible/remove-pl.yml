@@ -1,0 +1,70 @@
+---
+
+  - name: Build Configuration Files
+    hosts: iosxe
+    connection: local
+    gather_facts: no
+
+    vars:
+      provider:
+        username: "{{ un }}"
+        password: "{{ pwd }}"
+        host: "{{ inventory_hostname }}"
+        transport: cli
+        use_ssl: False
+
+      seed:
+        username: "{{ un }}"
+        password: "{{ pwd }}"
+        host: "csr1"
+        transport: cli
+        use_ssl: False
+
+    tasks:
+      - name: GATHER PREFIX LISTS
+        ios_command:
+          username: "{{ un }}"
+          password: "{{ pwd }}"
+          host: csr2
+          transport: cli
+          use_ssl: False
+          commands:
+            - show run | include prefix-list PL_
+        register: original_plist_output
+        tags: gather
+        run_once: true
+
+      #- debug: var=original_plist_output.stdout_lines[0]
+      #  tags: gather
+
+      - name: CREATE NEW PREFIX LIST
+        process_pl: prefix_list={{ original_plist_output.stdout_lines[0] }}
+        register: new_prefix_list
+        tags: create
+        run_once: true
+
+      - debug: var=new_prefix_list.finallist
+        tags: create
+        run_once: true
+
+      - name: BUILD CONFIGS
+        template: src=templates/remove-pl.j2 dest=configs/{{ inventory_hostname }}-remove-pl.cfg
+        tags: build
+
+      #- name: PUSH CONFIGS
+      #  napalm_install_config:
+      #    hostname={{ inventory_hostname }}
+      #    username={{ un }}
+      #    password={{ pwd }}
+      #    dev_os={{ os }}
+      #    config_file=configs/{{ inventory_hostname }}-pl.cfg
+      #    commit_changes=true
+      #    replace_config=false
+      #    get_diffs=true
+      #  tags: push
+
+      - name: PUSH CONFIGS TO IOS DEVICES
+        ios_config:
+          src: configs/{{ inventory_hostname }}-remove-pl.cfg
+          provider: "{{ provider }}"
+        tags: push

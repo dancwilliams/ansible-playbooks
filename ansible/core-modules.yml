@@ -1,0 +1,39 @@
+---
+
+  - name: CORE MODULES
+    hosts: nxos-spines
+    connection: local
+    gather_facts: no
+
+    vars:
+      provider:
+        username: "{{ un }}"
+        password: "{{ pwd }}"
+        host: "{{ inventory_hostname }}"
+        transport: "{{ api }}"
+    tasks:
+
+      - nxos_command:
+          commands:
+            - 'show version'
+            - 'show hostname'
+          provider: "{{ provider }}"  
+        register: output
+
+      - debug: var=output.stdout[0]['sys_ver_str']
+
+      - debug: var=output.stdout[1]['hostname']
+
+      - name: NXOS show version
+        nxos_command:
+          commands:
+            - show version
+            - show lldp neighbors
+          provider: "{{ provider }}"
+        register: output
+
+      - name: check OS version & neighbors
+        assert:
+          that:
+            - output.stdout[0]['sys_ver_str'] == "7.3(1)D1(1) [build 7.3(1)D1(0.10)]"
+            - output.stdout[1]['TABLE_nbor']['ROW_nbor']|length == 4

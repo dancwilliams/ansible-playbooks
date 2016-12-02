@@ -1,0 +1,43 @@
+---
+
+  - name: BACKUP
+    hosts: all
+    connection: local
+    gather_facts: no
+
+    tasks:
+
+      - name: BACKUP CONFIGS
+        ntc_save_config:
+          host={{ inventory_hostname }}
+          username={{ un }}
+          password={{ pwd }}
+          local_file=backups/{{ inventory_hostname }}.cfg
+          platform={{ vendor }}_{{ os }}_{{ api }}
+
+      - name: CLEAN UP CONFIGS 1
+        lineinfile: dest=backups/{{ inventory_hostname }}.cfg line="Building configuration..." state=absent
+        tags: clean
+
+      - name: CLEAN UP CONFIGS 2
+        lineinfile: dest=backups/{{ inventory_hostname }}.cfg regexp="Current configuration .*" state=absent
+        tags: clean
+
+  - name: DEPLOY CONFIGS
+    hosts: iosxe,eos
+    connection: local
+    gather_facts: no
+    tags: push
+
+    tasks:
+
+      - name: PUSH CONFIGS
+        napalm_install_config:
+          hostname={{ inventory_hostname }}
+          username={{ un }}
+          password={{ pwd }}
+          config_file=backups/{{ inventory_hostname }}.cfg
+          replace_config=true
+          commit_changes=true
+          dev_os={{ os }}
+          diff_file=diffs/{{ inventory_hostname }}.diffs
