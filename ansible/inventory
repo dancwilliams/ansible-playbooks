@@ -9,7 +9,7 @@ vendor=arista
 
 [nxos:vars]
 os=nxos
-api=nxapi
+api=cli
 vendor=cisco
 
 [iosxe:vars]
