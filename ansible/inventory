@@ -12,6 +12,11 @@ os=ios
 api=cli
 vendor=cisco
 
+[iosxe:vars]
+os=iosxe
+api=cli
+vendor=cisco
+
 [seed]
 172.23.1.54
 
@@ -27,3 +32,7 @@ nxos-spines
 172.23.1.57
 172.23.1.58
 172.23.1.59
+
+[iosxe]
+172.23.1.60
+172.23.1.61
