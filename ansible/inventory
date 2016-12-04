@@ -1,42 +1,29 @@
 [all:vars]
-un=ntc
-pwd=ntc123
-
-[eos:vars]
-os=eos
-api=eapi
-vendor=arista
+un=admin
+pwd=admin
 
 [nxos:vars]
 os=nxos
 api=cli
 vendor=cisco
 
-[iosxe:vars]
+[ios:vars]
 os=ios
-api=ssh
+api=cli
 vendor=cisco
 
-[eos:children]
-eos-spines
-eos-leaves
+[seed]
+172.23.1.54
 
-[eos-leaves]
-eos-leaf1
-eos-leaf2
-
-[eos-spines]
-eos-spine1
-eos-spine2
-
-[iosxe]
-csr1
-csr2
-csr3
+[ios]
+172.23.1.54
+172.23.1.55
+172.23.1.56
 
 [nxos:children]
 nxos-spines
 
 [nxos-spines]
-nxos-spine1
-nxos-spine2
+172.23.1.57
+172.23.1.58
+172.23.1.59

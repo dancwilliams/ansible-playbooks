@@ -1,7 +1,7 @@
 ---
 
   - name: Build Configuration Files
-    hosts: iosxe:nxos
+    hosts: all
     connection: local
     gather_facts: no
 
@@ -18,7 +18,7 @@
         ios_command:
           username: "{{ un }}"
           password: "{{ pwd }}"
-          host: csr1
+          host: 172.23.1.54
           transport: cli
           use_ssl: False
           commands:
@@ -42,7 +42,6 @@
 
       - name: BUILD CONFIGS
         template: src=templates/pl_template.j2 dest=configs/{{ inventory_hostname }}-pl.cfg
-        #hosts: iosxe:nxos
         tags: build
 
       #- name: PUSH CONFIGS
@@ -62,13 +61,22 @@
           src: configs/{{ inventory_hostname }}-pl.cfg
           provider: "{{ provider }}"
           match: none
+        when: os == "ios"
         tags: push_ios
+
+      - name: SAVE CONFIGS ON IOS DEVICES
+        ios_command:
+          commands: write memory
+          provider: "{{ provider }}"
+        when: os == "ios"
+        tags: save_ios
 
       - name: PUSH CONFIGS TO NXOS DEVICES
         nxos_config:
           src: configs/{{ inventory_hostname }}-pl.cfg
           provider: "{{ provider }}"
           match: none
+        when: os == "nxos"
         tags: push_nxos
 
     
