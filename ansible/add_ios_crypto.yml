@@ -1,0 +1,26 @@
+---
+
+  - name: Push crypto to IOS devices
+    hosts: all
+    connection: local
+    gather_facts: no
+
+    vars:
+      provider:
+        username: "{{ un }}"
+        password: "{{ pwd }}"
+        host: "{{ inventory_hostname }}"
+        transport: "{{ api }}"
+        use_ssl: False
+
+    tasks:
+      - name: PUSH CRYPTO TO IOS DEVICES
+        ios_config:
+          commands: crypto key generate rsa modulus 2048
+          provider: "{{ provider }}"
+        when: (os == "ios") or (os == "iosxe")
+        tags: push_ios_crypto
+
+
+#ssh-keygen -f "/home/dwilliams/.ssh/known_hosts" -R 172.23.1.54
+
