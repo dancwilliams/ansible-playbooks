@@ -1,7 +1,7 @@
 ---
 
   - name: Build Configuration Files
-    hosts: iosxe
+    hosts: all
     connection: local
     gather_facts: no
 
@@ -10,7 +10,7 @@
         username: "{{ un }}"
         password: "{{ pwd }}"
         host: "{{ inventory_hostname }}"
-        transport: cli
+        transport: "{{ api }}"
         use_ssl: False
 
     tasks:
@@ -18,7 +18,7 @@
         ios_command:
           username: "{{ un }}"
           password: "{{ pwd }}"
-          host: csr1
+          host: 172.23.1.54
           transport: cli
           use_ssl: False
           commands:
@@ -40,9 +40,10 @@
       #  tags: create
       #  run_once: true
 
-      - name: BUILD CONFIGS
-        template: src=templates/pl_template.j2 dest=configs/{{ inventory_hostname }}-pl.cfg
+      - name: BUILD NEW PREFIX LIST CONFIG FILE
+        template: src=templates/pl_template.j2 dest=configs/new_prefix_list.cfg
         tags: build
+        run_once: true
 
       #- name: PUSH CONFIGS
       #  napalm_install_config:
@@ -58,7 +59,26 @@
 
       - name: PUSH CONFIGS TO IOS DEVICES
         ios_config:
-          src: configs/{{ inventory_hostname }}-pl.cfg
+          src: configs/new_prefix_list.cfg
           provider: "{{ provider }}"
           match: none
-        tags: push
+          save: yes
+        when: (os == "ios") or (os == "iosxe")
+        tags: push_ios
+
+      #- name: SAVE CONFIGS ON IOS DEVICES
+      #  ios_command:
+      #    commands: write memory
+      #    provider: "{{ provider }}"
+      #  when: os == "ios"
+      #  tags: save_ios
+
+      - name: PUSH CONFIGS TO NXOS DEVICES
+        nxos_config:
+          src: configs/new_prefix_list.cfg
+          provider: "{{ provider }}"
+          match: none
+        when: os == "nxos"
+        tags: push_nxos
+
+    
