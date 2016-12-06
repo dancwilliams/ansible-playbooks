@@ -1,7 +1,0 @@
-{% for flavor in new_prefix_list.finallist %}
-{% for vrf in new_prefix_list.finallist[flavor]|sort %}
-
-no ip prefix-list PL_{{ vrf }}_{{ flavor|upper }}_PREFIXES
-
-{% endfor %}
-{% endfor %}
