@@ -1,0 +1,17 @@
+{% for flavor in config %}
+{% for vrf in config[flavor]|sort %}
+no ip prefix-list PL_{{ vrf }}_{{ flavor|upper }}_PREFIXES
+
+ip prefix-list PL_{{ vrf }}_{{ flavor|upper }}_PREFIXES description {{ config[flavor][vrf].description }}
+{%- set seq = 5 -%}
+{% for prefix in config[flavor][vrf].prefix %}
+{% if '/32' in prefix %}
+ip prefix-list PL_{{ vrf }}_{{ flavor|upper }}_PREFIXES seq {{ seq }} permit {{ prefix }}
+{%- else -%}
+ip prefix-list PL_{{ vrf }}_{{ flavor|upper }}_PREFIXES seq {{ seq }} permit {{ prefix }} le 32
+{%- endif -%} 
+  {%- set seq = seq + 5 -%}
+{% endfor %}
+ip prefix-list PL_{{ vrf }}_{{ flavor|upper }}_PREFIXES seq 500000 deny 0.0.0.0/0 le 32 
+{% endfor %}
+{% endfor %}
