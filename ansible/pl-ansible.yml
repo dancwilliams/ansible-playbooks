@@ -47,6 +47,7 @@
 
       - name: PUSH CONFIGS TO IOS DEVICES
         ios_config:
+          backup: yes
           src: configs/new_prefix_list.cfg
           provider: "{{ provider }}"
           match: none
@@ -58,11 +59,12 @@
         ios_command:
           commands: write memory
           provider: "{{ provider }}"
-        when: os == "ios"
+        when: (os == "ios") or (os == "iosxe")
         tags: save_ios
 
       - name: PUSH CONFIGS TO NXOS DEVICES
         nxos_config:
+          backup: yes
           src: configs/new_prefix_list.cfg
           provider: "{{ provider }}"
           match: none
