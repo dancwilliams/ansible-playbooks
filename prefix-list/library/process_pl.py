@@ -104,8 +104,8 @@ def process_new(original_yaml):
     remediation_vrfs = ['1:1200', '1:1500', '1:1600', '1:2100', '1:2600']
     output_dict = {}
     output_yaml = {}
-    output_yaml['allowed'] = {}
-    output_yaml['remediation'] = {}
+    #output_yaml['allowed'] = {}
+    #output_yaml['remediation'] = {}
 
     with open("pl_changes.yaml", 'r') as stream:
         try:
@@ -118,72 +118,62 @@ def process_new(original_yaml):
 
     for top_level_key, blank in change_yaml.items():
         if top_level_key == 'add':
-            allowed_vrf_list = []
-            for vrf, blank in change_yaml[top_level_key].items():
-                allowed_vrf_list.append(vrf)
-                #print(allowed_vrf_list)
-                output_dict['allowed'] = allowed_vrf_list
-                #temp_ip_list = []
-                temp_ip_set = netaddr.IPSet()
-                temp_list = change_yaml[top_level_key][vrf]
-                #print(temp_list)
-                for i, ip_address in enumerate(temp_list):
-                    temp_ip_set.add(ip_address)
-                for i, ip_address in enumerate(original_yaml['allowed'][vrf]['prefix']):
-                    temp_ip_set.add(ip_address)
-                temp_list = []
-                for i, ip_address in enumerate(temp_ip_set.iter_cidrs()):
-                    temp_list.append(str(ip_address))
-                original_yaml['allowed'][vrf]['prefix'] = temp_list
-                if vrf in remediation_vrfs:
-                    remediation_required = True
-                    for i, rem_vrf in enumerate(remediation_vrfs):
-                        temp_ip_set = netaddr.IPSet()
-                        if vrf != rem_vrf:
-                            temp_list = change_yaml[top_level_key][vrf]
-                            for i, ip_address in enumerate(temp_list):
-                                temp_ip_set.add(ip_address)
-                            for i, ip_address in enumerate(original_yaml['remediation'][rem_vrf]['prefix']):
-                                temp_ip_set.add(ip_address)
-                            temp_list = []
-                            for i, ip_address in enumerate(temp_ip_set.iter_cidrs()):
-                                temp_list.append(str(ip_address))
-                            original_yaml['remediation'][rem_vrf]['prefix'] = temp_list
+            for list_type, blank in change_yaml[top_level_key].items():
+                for vrf, blank in change_yaml[top_level_key][list_type].items():
+                    temp_ip_set = netaddr.IPSet()
+                    temp_list = change_yaml[top_level_key][list_type][vrf]
+                    for i, ip_address in enumerate(temp_list):
+                        temp_ip_set.add(ip_address)
+                    for i, ip_address in enumerate(original_yaml[list_type][vrf]['prefix']):
+                        temp_ip_set.add(ip_address)
+                    temp_list = []
+                    for i, ip_address in enumerate(temp_ip_set.iter_cidrs()):
+                        temp_list.append(str(ip_address))
+                    original_yaml[list_type][vrf]['prefix'] = temp_list
+                    if list_type != 'remediation':
+                        if vrf in remediation_vrfs:
+                            remediation_required = True
+                            for i, rem_vrf in enumerate(remediation_vrfs):
+                                temp_ip_set = netaddr.IPSet()
+                                if vrf != rem_vrf:
+                                    temp_list = change_yaml[top_level_key][list_type][vrf]
+                                    for i, ip_address in enumerate(temp_list):
+                                        temp_ip_set.add(ip_address)
+                                    for i, ip_address in enumerate(original_yaml['remediation'][rem_vrf]['prefix']):
+                                        temp_ip_set.add(ip_address)
+                                    temp_list = []
+                                    for i, ip_address in enumerate(temp_ip_set.iter_cidrs()):
+                                        temp_list.append(str(ip_address))
+                                    original_yaml['remediation'][rem_vrf]['prefix'] = temp_list
 
         if top_level_key == 'remove':
-            for vrf, blank in change_yaml[top_level_key].items():
-                temp_ip_set = netaddr.IPSet()
-                temp_list = change_yaml[top_level_key][vrf]
-                #print(temp_list)
-                for i, ip_address in enumerate(original_yaml['allowed'][vrf]['prefix']):
-                    temp_ip_set.add(ip_address)
-                for i, ip_address in enumerate(temp_list):
-                    temp_ip_set.remove(ip_address)
-                temp_list = []
-                for i, ip_address in enumerate(temp_ip_set.iter_cidrs()):
-                    temp_list.append(str(ip_address))
-                original_yaml['allowed'][vrf]['prefix'] = temp_list
-                if vrf in remediation_vrfs:
-                    remediation_required = True
-                    for i, rem_vrf in enumerate(remediation_vrfs):
-                        temp_ip_set = netaddr.IPSet()
-                        if vrf != rem_vrf:
-                            temp_list = change_yaml[top_level_key][vrf]
-                            for i, ip_address in enumerate(original_yaml['remediation'].get(rem_vrf)['prefix']):
-                                temp_ip_set.add(ip_address)
-                            for i, ip_address in enumerate(temp_list):
-                                temp_ip_set.remove(ip_address)
-                            temp_list = []
-                            for i, ip_address in enumerate(temp_ip_set.iter_cidrs()):
-                                temp_list.append(str(ip_address))
-                            original_yaml['remediation'][rem_vrf]['prefix'] = temp_list
-
- 
-    #for i, final_vrf in enumerate(allowed_vrf_list):
-    #    output_yaml['allowed'][final_vrf] = original_yaml['allowed'][final_vrf]
-    #if remediation_required == True:
-    #    for i, final_vrf in enumerate(remediation_vrfs):
-    #        output_yaml['remediation'][final_vrf] = original_yaml['remediation'][final_vrf]
+            for list_type, blank in change_yaml[top_level_key].items():
+                for vrf, blank in change_yaml[top_level_key][list_type].items():
+                    temp_ip_set = netaddr.IPSet()
+                    temp_list = change_yaml[top_level_key][list_type][vrf]
+                    #print(temp_list)
+                    for i, ip_address in enumerate(original_yaml[list_type][vrf]['prefix']):
+                        temp_ip_set.add(ip_address)
+                    for i, ip_address in enumerate(temp_list):
+                        temp_ip_set.remove(ip_address)
+                    temp_list = []
+                    for i, ip_address in enumerate(temp_ip_set.iter_cidrs()):
+                        temp_list.append(str(ip_address))
+                    original_yaml[list_type][vrf]['prefix'] = temp_list
+                    if list_type != 'remediation':
+                        if vrf in remediation_vrfs:
+                            for i, rem_vrf in enumerate(remediation_vrfs):
+                                temp_ip_set = netaddr.IPSet()
+                                if vrf != rem_vrf:
+                                    temp_list = change_yaml[top_level_key][list_type][vrf]
+                                    for i, ip_address in enumerate(original_yaml['remediation'].get(rem_vrf)['prefix']):
+                                        temp_ip_set.add(ip_address)
+                                    for i, ip_address in enumerate(temp_list):
+                                        temp_ip_set.remove(ip_address)
+                                    temp_list = []
+                                    for i, ip_address in enumerate(temp_ip_set.iter_cidrs()):
+                                        temp_list.append(str(ip_address))
+                                    original_yaml['remediation'][rem_vrf]['prefix'] = temp_list
             
     return original_yaml
      

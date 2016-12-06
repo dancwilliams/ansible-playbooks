@@ -1,9 +1,9 @@
 Building configuration...
 
   
-Current configuration : 72795 bytes
+Current configuration : 72876 bytes
 !
-! Last configuration change at 16:43:56 UTC Tue Dec 6 2016 by ********
+! Last configuration change at 23:07:14 UTC Tue Dec 6 2016 by ********
 !
 version 15.6
 service timestamps debug datetime msec
@@ -957,6 +957,7 @@ ip prefix-list PL_1:2500_REMEDIATION_PREFIXES description PL_1:2500_REMEDIATION_
 ip prefix-list PL_1:2500_REMEDIATION_PREFIXES seq 5 permit 10.129.0.0/16 le 32
 ip prefix-list PL_1:2500_REMEDIATION_PREFIXES seq 10 permit 10.166.128.0/19 le 32
 ip prefix-list PL_1:2500_REMEDIATION_PREFIXES seq 15 permit 10.166.192.0/18 le 32
+ip prefix-list PL_1:2500_REMEDIATION_PREFIXES seq 20 permit 177.177.0.0/16 le 32
 ip prefix-list PL_1:2500_REMEDIATION_PREFIXES seq 500000 deny 0.0.0.0/0 le 32
 !
 ip prefix-list PL_1:2600_ALLOWED_PREFIXES description PL_1:2600_ALLOWED_PREFIXES TEST DESCRIPTION
