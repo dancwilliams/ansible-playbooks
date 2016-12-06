@@ -1,3 +1,0 @@
-+interface Loopback10
- +description added by Ansible
- +ip address 1.1.1.1 255.255.255.0
