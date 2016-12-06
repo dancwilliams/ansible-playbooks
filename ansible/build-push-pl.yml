@@ -22,7 +22,7 @@
           transport: cli
           use_ssl: False
           commands:
-            - show run | include prefix-list PL_
+            - show run | include prefix-list PL_1
         register: original_plist_output
         tags: gather
         run_once: true
