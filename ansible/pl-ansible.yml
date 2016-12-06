@@ -1,0 +1,70 @@
+---
+
+  - name: Build Configuration Files
+    hosts: all
+    connection: local
+    gather_facts: no
+
+    vars:
+      provider:
+        username: "{{ un }}"
+        password: "{{ pwd }}"
+        host: "{{ inventory_hostname }}"
+        transport: "{{ api }}"
+        use_ssl: False
+
+    tasks:
+      - name: GATHER PREFIX LISTS
+        ios_command:
+          username: "{{ un }}"
+          password: "{{ pwd }}"
+          host: 172.23.1.54
+          transport: cli
+          use_ssl: False
+          commands:
+            - show run | include prefix-list PL_1
+        register: original_plist_output
+        tags: gather
+        run_once: true
+
+      #- debug: var=original_plist_output.stdout_lines[0]
+      #  tags: gather
+
+      - name: CREATE NEW PREFIX LIST
+        process_pl: prefix_list={{ original_plist_output.stdout_lines[0] }}
+        register: new_prefix_list
+        tags: create
+        run_once: true
+
+      #- debug: var=new_prefix_list.finallist
+      #  tags: create
+      #  run_once: true
+
+      - name: BUILD NEW PREFIX LIST CONFIG FILE
+        template: src=templates/pl_template.j2 dest=configs/new_prefix_list.cfg
+        tags: build
+        run_once: true
+
+      - name: PUSH CONFIGS TO IOS DEVICES
+        ios_config:
+          src: configs/new_prefix_list.cfg
+          provider: "{{ provider }}"
+          match: none
+          #save: yes - not working due to bug in 2.2. Pull request submitted. Work around below.
+        when: (os == "ios") or (os == "iosxe")
+        tags: push_ios
+
+      - name: SAVE CONFIGS ON IOS DEVICES
+        ios_command:
+          commands: write memory
+          provider: "{{ provider }}"
+        when: os == "ios"
+        tags: save_ios
+
+      - name: PUSH CONFIGS TO NXOS DEVICES
+        nxos_config:
+          src: configs/new_prefix_list.cfg
+          provider: "{{ provider }}"
+          match: none
+        when: os == "nxos"
+        tags: push_nxos
