@@ -1,8 +1,8 @@
 Building configuration...
 
-Current configuration : 73250 bytes
+Current configuration : 70950 bytes
 !
-! Last configuration change at 16:06:01 UTC Tue Dec 6 2016 by ********
+! Last configuration change at 13:30:16 UTC Wed Dec 7 2016 by ********
 !
 version 16.3
 service config
@@ -11,7 +11,7 @@ service timestamps log datetime msec
 no platform punt-keepalive disable-kernel-core
 platform console serial
 !
-hostname iosxe-2
+hostname iosxe-1
 !
 boot-start-marker
 boot-end-marker
@@ -22,6 +22,7 @@ vrf definition MGMT
  address-family ipv4
  exit-address-family
 !
+enable secret 5 $1$J/Wx$wWtb5FUCxxge0lIPJO8BZ/
 !
 no aaa new-model
 !
@@ -57,42 +58,54 @@ multilink bundle-name authenticated
 !
 !
 !
-crypto pki trustpoint TP-self-signed-3593339053
+crypto pki trustpoint TP-self-signed-179087263
  enrollment selfsigned
- subject-name cn=IOS-Self-Signed-Certificate-3593339053
+ subject-name cn=IOS-Self-Signed-Certificate-179087263
  revocation-check none
- rsakeypair TP-self-signed-3593339053
+ rsakeypair TP-self-signed-179087263
+!
+crypto pki trustpoint TP-self-signed-1759326438
+ enrollment selfsigned
+ subject-name cn=IOS-Self-Signed-Certificate-1759326438
+ revocation-check none
+ rsakeypair TP-self-signed-1759326438
 !
 !
-crypto pki certificate chain TP-self-signed-3593339053
+crypto pki certificate chain TP-self-signed-179087263
  certificate self-signed 01
-  30820330 30820218 A0030201 02020101 300D0609 2A864886 F70D0101 05050030 
-  31312F30 2D060355 04031326 494F532D 53656C66 2D536967 6E65642D 43657274 
-  69666963 6174652D 33353933 33333930 3533301E 170D3136 31323034 31363031 
-  34345A17 0D323030 31303130 30303030 305A3031 312F302D 06035504 03132649 
-  4F532D53 656C662D 5369676E 65642D43 65727469 66696361 74652D33 35393333 
-  33393035 33308201 22300D06 092A8648 86F70D01 01010500 0382010F 00308201 
-  0A028201 0100B0E4 D8A55D22 9320C4D2 22960E84 04E45D5D 3B724322 15B0DD75 
-  5918A68B D97B99C4 70878910 7944CC7C 2B840B9E A41BA78E 417E40E0 6AC0C7A0 
-  88A715B9 0416E8DF 1729BB8B 9A8A5A65 5C80AE46 0627AFC5 7B60B97B 60250C70 
-  81788DCE B1CE1AB7 6692BD4F 47C01626 742AF566 69EA26B1 B5FE3640 0E853ABF 
-  0D9B317C E525553E E2CCD443 950C3E6D B65C468B 8D21BCBA 176EDB6B BFDD1CA8 
-  EB26C8C4 B669D25C 2DF09070 3DCE3F2B 703BDA27 FB7F7D39 FDFAC572 A67C74CA 
-  E4B49B26 B12A6D71 C75B70F1 4C550930 E4868E61 86504CEF 8DAE3377 477F2E27 
-  CE843ECC A3F0B4DC 239E9AE7 33161634 756CCB14 9060907D 855675D9 F621A50D 
-  86C0AF1A 358D0203 010001A3 53305130 0F060355 1D130101 FF040530 030101FF 
-  301F0603 551D2304 18301680 14D6EC2C 239D64FC 8C1A4078 0337C410 DD620008 
-  59301D06 03551D0E 04160414 D6EC2C23 9D64FC8C 1A407803 37C410DD 62000859 
-  300D0609 2A864886 F70D0101 05050003 82010100 584256BF F7CEDBBA 63CEA1D8 
-  534BC845 1FFAC6DA DC907286 240FD4F7 FB49FBC6 73DEF9EA 15260FBE DEBACB66 
-  17808C90 F904EE6F FE0EFFB5 4C665674 9BB97CAE E2AE4389 6D6209B4 30E69D2D 
-  F71FC6B1 259E6E7E BCB9F49A 24B54BF2 96688BFF D67DFF79 28CA5CCE 8E45C277 
-  289B1F3E 832EE1CA 18418810 A64D88C0 6D4C0FA7 D8908E29 81B453DC F315B56A 
-  8D5C6771 1F5516AC 827ACBF5 6ABE0F23 961EFF2D D92BA12C 3469D68F 1F37E9DF 
-  77959B39 8B24EA24 91D2E42A 5CED413C 49BC5253 1BA14DC0 79D656B8 53C4B5C3 
-  AB3ED70D 5C1DB5A2 45F7E312 617F8170 38D96FAA 721AEF0C F568A029 B89BE28B 
-  298D7281 8B67465E FDE92D37 CC967F74 4AED01D6
+  3082032E 30820216 A0030201 02020101 300D0609 2A864886 F70D0101 05050030 
+  30312E30 2C060355 04031325 494F532D 53656C66 2D536967 6E65642D 43657274 
+  69666963 6174652D 31373930 38373236 33301E17 0D313631 32303431 36303131 
+  325A170D 32303031 30313030 30303030 5A303031 2E302C06 03550403 1325494F 
+  532D5365 6C662D53 69676E65 642D4365 72746966 69636174 652D3137 39303837 
+  32363330 82012230 0D06092A 864886F7 0D010101 05000382 010F0030 82010A02 
+  82010100 BEB0BB60 C8BBB5C3 C9EC61B1 87A7D50A 7F2670DA 80340367 FAFF8900 
+  E150F56E AA4C9F69 D0E7CF96 7D587534 C515515C 3E9F4F55 69E2E7B6 0ED5D518 
+  82AB3374 750CA8DF C5D6779F FEB119D0 0F123A89 EE1B5472 25D03465 1152F0B1 
+  516BFA7E 0B35BCCE BD6DDDC6 8079B0FB BD347A89 18D4EB88 9DBF1004 31E5B2EA 
+  7B8787A4 BEE319EA 92732563 DC3E05C8 D8DCB72E 23139BB6 CE4A4823 397A11FC 
+  7549532F 7A6F726B E2DD9307 DE22127B 4F0099AC 3416382E 5F1F48F5 4D81E5C3 
+  C5A1CB31 B942C0ED 0C694064 2E58E85E 95BF88F6 E13BE0E2 281E12FE 848A451C 
+  0B8A79B9 257BC169 A758EB5E 0B2A68C6 F71E7C39 B57F4180 F486183B 02B1F634 
+  EE923CD9 02030100 01A35330 51300F06 03551D13 0101FF04 05300301 01FF301F 
+  0603551D 23041830 16801467 B51C0862 22892136 FF80BABE 646EF5EF 527E9F30 
+  1D060355 1D0E0416 041467B5 1C086222 892136FF 80BABE64 6EF5EF52 7E9F300D 
+  06092A86 4886F70D 01010505 00038201 01003E53 0E604A98 F3D0A5C2 6C34DBC1 
+  16797973 27AA5D10 EC17A955 C7368011 DC74D8CD C21EA8B2 FEF8FA42 E52623CC 
+  54675842 3CC56334 BB45CED4 DD252248 69B6564F 4B7244D8 7B9DE936 157ADD9F 
+  FCF17FCC CB50EEFE 3B267A73 CDDBDA6B 0C0C7187 4E893384 9B868633 43E50411 
+  1F74159D 9DDC9137 B4F121CD E9BE9798 73242231 B201C62F 6B2D3E8C 1A5FCB9A 
+  DAB8DBDD 3F4C1B8F DE7F7123 0F770BBF 63A3DB5A 578B7EEB 8B1524E3 42FAD1FE 
+  D901DED4 B51EEECB 6C4D4BEA 7D3BAAA3 98386182 3C1838AC CF325123 AB0B19D4 
+  23D1CEBF 653AE3DF 7061BE01 4408043B F38FCCC2 11238259 613AFE57 DFC72C0B 
+  AA939CF1 33A00C8D 394BAE12 C7033699 691D
   	quit
+crypto pki certificate chain TP-self-signed-1759326438
+!
+crypto pki certificate pool
+ ! ('certificate ca' cmd has been deprecated. Downloaded
+ !  Trustpool certificates should be re-downloaded 
+ !  using 'crypro pki trustpool import url <url>')
 
 
 !
@@ -102,12 +115,13 @@ crypto pki certificate chain TP-self-signed-3593339053
 !
 !
 !
-license udi pid CSR1000V sn 9609P4TA6QA
+license udi pid CSR1000V sn 9PNAPX867S5
 diagnostic bootup level minimal
 !
 spanning-tree extend system-id
 !
 !
+username cisco privilege 15 secret 5 $1$lrUq$/r9e6Oisl/iqZnWGwQ48s0
 username ******** privilege 15 password 0 ********
 !
 redundancy
@@ -140,7 +154,7 @@ redundancy
 !
 interface GigabitEthernet1
  vrf forwarding MGMT
- ip address dhcp
+ ip address 172.23.1.60 255.255.255.0
  negotiation auto
  no mop enabled
  no mop sysid
@@ -168,6 +182,7 @@ ip http authentication local
 ip http secure-server
 !
 ip route vrf MGMT 0.0.0.0 0.0.0.0 172.23.1.1
+ip ssh version 2
 !
 !
 !
@@ -254,127 +269,116 @@ ip prefix-list PL_1:1102_REMEDIATION_PREFIXES description PL_1:1102_REMEDIATION_
 ip prefix-list PL_1:1102_REMEDIATION_PREFIXES seq 500000 deny 0.0.0.0/0 le 32
 !
 ip prefix-list PL_1:1200_ALLOWED_PREFIXES description PL_1:1200_ALLOWED_PREFIXES TEST DESCRIPTION
-ip prefix-list PL_1:1200_ALLOWED_PREFIXES seq 5 permit 1.1.1.1/32
-ip prefix-list PL_1:1200_ALLOWED_PREFIXES seq 10 permit 6.6.6.6/32
-ip prefix-list PL_1:1200_ALLOWED_PREFIXES seq 15 permit 10.32.0.0/16 le 32
-ip prefix-list PL_1:1200_ALLOWED_PREFIXES seq 20 permit 10.33.32.0/19 le 32
-ip prefix-list PL_1:1200_ALLOWED_PREFIXES seq 25 permit 10.33.64.0/18 le 32
-ip prefix-list PL_1:1200_ALLOWED_PREFIXES seq 30 permit 10.41.4.0/22 le 32
-ip prefix-list PL_1:1200_ALLOWED_PREFIXES seq 35 permit 10.41.32.0/19 le 32
-ip prefix-list PL_1:1200_ALLOWED_PREFIXES seq 40 permit 10.41.192.0/18 le 32
-ip prefix-list PL_1:1200_ALLOWED_PREFIXES seq 45 permit 10.42.4.0/22 le 32
-ip prefix-list PL_1:1200_ALLOWED_PREFIXES seq 50 permit 10.42.132.0/22 le 32
-ip prefix-list PL_1:1200_ALLOWED_PREFIXES seq 55 permit 10.48.64.0/18 le 32
-ip prefix-list PL_1:1200_ALLOWED_PREFIXES seq 60 permit 10.48.192.0/18 le 32
-ip prefix-list PL_1:1200_ALLOWED_PREFIXES seq 65 permit 10.73.72.0/21 le 32
-ip prefix-list PL_1:1200_ALLOWED_PREFIXES seq 70 permit 10.73.80.0/21 le 32
-ip prefix-list PL_1:1200_ALLOWED_PREFIXES seq 75 permit 10.73.209.0/24 le 32
-ip prefix-list PL_1:1200_ALLOWED_PREFIXES seq 80 permit 10.73.214.0/24 le 32
-ip prefix-list PL_1:1200_ALLOWED_PREFIXES seq 85 permit 10.73.255.64/26 le 32
-ip prefix-list PL_1:1200_ALLOWED_PREFIXES seq 90 permit 10.73.255.128/26 le 32
-ip prefix-list PL_1:1200_ALLOWED_PREFIXES seq 95 permit 10.80.64.0/18 le 32
-ip prefix-list PL_1:1200_ALLOWED_PREFIXES seq 100 permit 10.81.64.0/18 le 32
-ip prefix-list PL_1:1200_ALLOWED_PREFIXES seq 105 permit 10.83.64.0/18 le 32
-ip prefix-list PL_1:1200_ALLOWED_PREFIXES seq 110 permit 10.91.16.0/21 le 32
-ip prefix-list PL_1:1200_ALLOWED_PREFIXES seq 115 permit 10.93.72.0/21 le 32
-ip prefix-list PL_1:1200_ALLOWED_PREFIXES seq 120 permit 10.93.80.0/21 le 32
-ip prefix-list PL_1:1200_ALLOWED_PREFIXES seq 125 permit 10.93.209.0/24 le 32
-ip prefix-list PL_1:1200_ALLOWED_PREFIXES seq 130 permit 10.93.214.0/24 le 32
-ip prefix-list PL_1:1200_ALLOWED_PREFIXES seq 135 permit 10.93.255.64/26 le 32
-ip prefix-list PL_1:1200_ALLOWED_PREFIXES seq 140 permit 10.93.255.128/26 le 32
-ip prefix-list PL_1:1200_ALLOWED_PREFIXES seq 145 permit 10.96.0.0/18 le 32
-ip prefix-list PL_1:1200_ALLOWED_PREFIXES seq 150 permit 10.97.0.0/18 le 32
-ip prefix-list PL_1:1200_ALLOWED_PREFIXES seq 155 permit 10.137.16.0/21 le 32
-ip prefix-list PL_1:1200_ALLOWED_PREFIXES seq 160 permit 10.152.16.0/20 le 32
-ip prefix-list PL_1:1200_ALLOWED_PREFIXES seq 165 permit 10.157.32.0/19 le 32
-ip prefix-list PL_1:1200_ALLOWED_PREFIXES seq 170 permit 10.166.16.0/20 le 32
-ip prefix-list PL_1:1200_ALLOWED_PREFIXES seq 175 permit 10.169.64.0/18 le 32
-ip prefix-list PL_1:1200_ALLOWED_PREFIXES seq 180 permit 10.172.64.0/18 le 32
-ip prefix-list PL_1:1200_ALLOWED_PREFIXES seq 185 permit 10.172.192.0/18 le 32
-ip prefix-list PL_1:1200_ALLOWED_PREFIXES seq 190 permit 10.185.16.0/20 le 32
-ip prefix-list PL_1:1200_ALLOWED_PREFIXES seq 195 permit 10.186.16.0/20 le 32
-ip prefix-list PL_1:1200_ALLOWED_PREFIXES seq 200 permit 10.188.64.0/18 le 32
-ip prefix-list PL_1:1200_ALLOWED_PREFIXES seq 205 permit 10.189.16.0/20 le 32
-ip prefix-list PL_1:1200_ALLOWED_PREFIXES seq 210 permit 10.202.0.0/19 le 32
-ip prefix-list PL_1:1200_ALLOWED_PREFIXES seq 215 permit 10.220.12.0/22 le 32
-ip prefix-list PL_1:1200_ALLOWED_PREFIXES seq 220 permit 10.220.76.0/22 le 32
-ip prefix-list PL_1:1200_ALLOWED_PREFIXES seq 225 permit 10.222.32.0/19 le 32
-ip prefix-list PL_1:1200_ALLOWED_PREFIXES seq 230 permit 10.225.168.0/21 le 32
-ip prefix-list PL_1:1200_ALLOWED_PREFIXES seq 235 permit 10.225.176.0/21 le 32
-ip prefix-list PL_1:1200_ALLOWED_PREFIXES seq 240 permit 10.227.32.0/19 le 32
-ip prefix-list PL_1:1200_ALLOWED_PREFIXES seq 245 permit 10.228.160.0/21 le 32
-ip prefix-list PL_1:1200_ALLOWED_PREFIXES seq 250 permit 10.228.208.0/20 le 32
-ip prefix-list PL_1:1200_ALLOWED_PREFIXES seq 255 permit 10.228.248.0/22 le 32
-ip prefix-list PL_1:1200_ALLOWED_PREFIXES seq 260 permit 10.229.32.0/19 le 32
-ip prefix-list PL_1:1200_ALLOWED_PREFIXES seq 265 permit 10.230.208.0/20 le 32
-ip prefix-list PL_1:1200_ALLOWED_PREFIXES seq 270 permit 10.241.0.0/18 le 32
-ip prefix-list PL_1:1200_ALLOWED_PREFIXES seq 275 permit 10.249.0.0/18 le 32
-ip prefix-list PL_1:1200_ALLOWED_PREFIXES seq 280 permit 10.249.128.0/18 le 32
-ip prefix-list PL_1:1200_ALLOWED_PREFIXES seq 285 permit 12.1.0.0/16 le 32
-ip prefix-list PL_1:1200_ALLOWED_PREFIXES seq 290 permit 12.2.0.0/18 le 32
-ip prefix-list PL_1:1200_ALLOWED_PREFIXES seq 295 permit 12.12.0.0/16 le 32
+ip prefix-list PL_1:1200_ALLOWED_PREFIXES seq 5 permit 6.6.6.6/32
+ip prefix-list PL_1:1200_ALLOWED_PREFIXES seq 10 permit 10.32.0.0/16 le 32
+ip prefix-list PL_1:1200_ALLOWED_PREFIXES seq 15 permit 10.33.32.0/19 le 32
+ip prefix-list PL_1:1200_ALLOWED_PREFIXES seq 20 permit 10.33.64.0/18 le 32
+ip prefix-list PL_1:1200_ALLOWED_PREFIXES seq 25 permit 10.41.4.0/22 le 32
+ip prefix-list PL_1:1200_ALLOWED_PREFIXES seq 30 permit 10.41.32.0/19 le 32
+ip prefix-list PL_1:1200_ALLOWED_PREFIXES seq 35 permit 10.41.192.0/18 le 32
+ip prefix-list PL_1:1200_ALLOWED_PREFIXES seq 40 permit 10.42.4.0/22 le 32
+ip prefix-list PL_1:1200_ALLOWED_PREFIXES seq 45 permit 10.42.132.0/22 le 32
+ip prefix-list PL_1:1200_ALLOWED_PREFIXES seq 50 permit 10.48.64.0/18 le 32
+ip prefix-list PL_1:1200_ALLOWED_PREFIXES seq 55 permit 10.48.192.0/18 le 32
+ip prefix-list PL_1:1200_ALLOWED_PREFIXES seq 60 permit 10.73.72.0/21 le 32
+ip prefix-list PL_1:1200_ALLOWED_PREFIXES seq 65 permit 10.73.80.0/21 le 32
+ip prefix-list PL_1:1200_ALLOWED_PREFIXES seq 70 permit 10.73.209.0/24 le 32
+ip prefix-list PL_1:1200_ALLOWED_PREFIXES seq 75 permit 10.73.214.0/24 le 32
+ip prefix-list PL_1:1200_ALLOWED_PREFIXES seq 80 permit 10.73.255.64/26 le 32
+ip prefix-list PL_1:1200_ALLOWED_PREFIXES seq 85 permit 10.73.255.128/26 le 32
+ip prefix-list PL_1:1200_ALLOWED_PREFIXES seq 90 permit 10.80.64.0/18 le 32
+ip prefix-list PL_1:1200_ALLOWED_PREFIXES seq 95 permit 10.81.64.0/18 le 32
+ip prefix-list PL_1:1200_ALLOWED_PREFIXES seq 100 permit 10.83.64.0/18 le 32
+ip prefix-list PL_1:1200_ALLOWED_PREFIXES seq 105 permit 10.91.16.0/21 le 32
+ip prefix-list PL_1:1200_ALLOWED_PREFIXES seq 110 permit 10.93.72.0/21 le 32
+ip prefix-list PL_1:1200_ALLOWED_PREFIXES seq 115 permit 10.93.80.0/21 le 32
+ip prefix-list PL_1:1200_ALLOWED_PREFIXES seq 120 permit 10.93.209.0/24 le 32
+ip prefix-list PL_1:1200_ALLOWED_PREFIXES seq 125 permit 10.93.214.0/24 le 32
+ip prefix-list PL_1:1200_ALLOWED_PREFIXES seq 130 permit 10.93.255.64/26 le 32
+ip prefix-list PL_1:1200_ALLOWED_PREFIXES seq 135 permit 10.93.255.128/26 le 32
+ip prefix-list PL_1:1200_ALLOWED_PREFIXES seq 140 permit 10.96.0.0/18 le 32
+ip prefix-list PL_1:1200_ALLOWED_PREFIXES seq 145 permit 10.97.0.0/18 le 32
+ip prefix-list PL_1:1200_ALLOWED_PREFIXES seq 150 permit 10.137.16.0/21 le 32
+ip prefix-list PL_1:1200_ALLOWED_PREFIXES seq 155 permit 10.152.16.0/20 le 32
+ip prefix-list PL_1:1200_ALLOWED_PREFIXES seq 160 permit 10.157.32.0/19 le 32
+ip prefix-list PL_1:1200_ALLOWED_PREFIXES seq 165 permit 10.166.16.0/20 le 32
+ip prefix-list PL_1:1200_ALLOWED_PREFIXES seq 170 permit 10.169.64.0/18 le 32
+ip prefix-list PL_1:1200_ALLOWED_PREFIXES seq 175 permit 10.172.64.0/18 le 32
+ip prefix-list PL_1:1200_ALLOWED_PREFIXES seq 180 permit 10.172.192.0/18 le 32
+ip prefix-list PL_1:1200_ALLOWED_PREFIXES seq 185 permit 10.185.16.0/20 le 32
+ip prefix-list PL_1:1200_ALLOWED_PREFIXES seq 190 permit 10.186.16.0/20 le 32
+ip prefix-list PL_1:1200_ALLOWED_PREFIXES seq 195 permit 10.188.64.0/18 le 32
+ip prefix-list PL_1:1200_ALLOWED_PREFIXES seq 200 permit 10.189.16.0/20 le 32
+ip prefix-list PL_1:1200_ALLOWED_PREFIXES seq 205 permit 10.202.0.0/19 le 32
+ip prefix-list PL_1:1200_ALLOWED_PREFIXES seq 210 permit 10.220.12.0/22 le 32
+ip prefix-list PL_1:1200_ALLOWED_PREFIXES seq 215 permit 10.220.76.0/22 le 32
+ip prefix-list PL_1:1200_ALLOWED_PREFIXES seq 220 permit 10.222.32.0/19 le 32
+ip prefix-list PL_1:1200_ALLOWED_PREFIXES seq 225 permit 10.225.168.0/21 le 32
+ip prefix-list PL_1:1200_ALLOWED_PREFIXES seq 230 permit 10.225.176.0/21 le 32
+ip prefix-list PL_1:1200_ALLOWED_PREFIXES seq 235 permit 10.227.32.0/19 le 32
+ip prefix-list PL_1:1200_ALLOWED_PREFIXES seq 240 permit 10.228.160.0/21 le 32
+ip prefix-list PL_1:1200_ALLOWED_PREFIXES seq 245 permit 10.228.208.0/20 le 32
+ip prefix-list PL_1:1200_ALLOWED_PREFIXES seq 250 permit 10.228.248.0/22 le 32
+ip prefix-list PL_1:1200_ALLOWED_PREFIXES seq 255 permit 10.229.32.0/19 le 32
+ip prefix-list PL_1:1200_ALLOWED_PREFIXES seq 260 permit 10.230.208.0/20 le 32
+ip prefix-list PL_1:1200_ALLOWED_PREFIXES seq 265 permit 10.241.0.0/18 le 32
+ip prefix-list PL_1:1200_ALLOWED_PREFIXES seq 270 permit 10.249.0.0/18 le 32
+ip prefix-list PL_1:1200_ALLOWED_PREFIXES seq 275 permit 10.249.128.0/18 le 32
 ip prefix-list PL_1:1200_ALLOWED_PREFIXES seq 500000 deny 0.0.0.0/0 le 32
 !
 ip prefix-list PL_1:1200_REMEDIATION_PREFIXES description PL_1:1200_REMEDIATION_PREFIXES TEST DESCRIPTION
-ip prefix-list PL_1:1200_REMEDIATION_PREFIXES seq 5 permit 3.3.3.3/32
-ip prefix-list PL_1:1200_REMEDIATION_PREFIXES seq 10 permit 10.6.240.0/21 le 32
-ip prefix-list PL_1:1200_REMEDIATION_PREFIXES seq 15 permit 10.7.72.0/22 le 32
-ip prefix-list PL_1:1200_REMEDIATION_PREFIXES seq 20 permit 10.7.216.0/22 le 32
-ip prefix-list PL_1:1200_REMEDIATION_PREFIXES seq 25 permit 10.33.0.0/19 le 32
-ip prefix-list PL_1:1200_REMEDIATION_PREFIXES seq 30 permit 10.69.200.0/22 le 32
-ip prefix-list PL_1:1200_REMEDIATION_PREFIXES seq 35 permit 10.80.56.128/26 le 32
-ip prefix-list PL_1:1200_REMEDIATION_PREFIXES seq 40 permit 10.81.184.0/25 le 32
-ip prefix-list PL_1:1200_REMEDIATION_PREFIXES seq 45 permit 10.81.224.0/23 le 32
-ip prefix-list PL_1:1200_REMEDIATION_PREFIXES seq 50 permit 10.92.0.0/19 le 32
-ip prefix-list PL_1:1200_REMEDIATION_PREFIXES seq 55 permit 10.92.64.0/21 le 32
-ip prefix-list PL_1:1200_REMEDIATION_PREFIXES seq 60 permit 10.92.206.0/24 le 32
-ip prefix-list PL_1:1200_REMEDIATION_PREFIXES seq 65 permit 10.92.252.0/23 le 32
-ip prefix-list PL_1:1200_REMEDIATION_PREFIXES seq 70 permit 10.110.0.0/16 le 32
-ip prefix-list PL_1:1200_REMEDIATION_PREFIXES seq 75 permit 10.129.0.0/16 le 32
-ip prefix-list PL_1:1200_REMEDIATION_PREFIXES seq 80 permit 10.132.24.0/22 le 32
-ip prefix-list PL_1:1200_REMEDIATION_PREFIXES seq 85 permit 10.139.0.0/16 le 32
-ip prefix-list PL_1:1200_REMEDIATION_PREFIXES seq 90 permit 10.160.128.0/18 le 32
-ip prefix-list PL_1:1200_REMEDIATION_PREFIXES seq 95 permit 10.161.64.0/19 le 32
-ip prefix-list PL_1:1200_REMEDIATION_PREFIXES seq 100 permit 10.166.128.0/19 le 32
-ip prefix-list PL_1:1200_REMEDIATION_PREFIXES seq 105 permit 10.166.160.0/20 le 32
-ip prefix-list PL_1:1200_REMEDIATION_PREFIXES seq 110 permit 10.166.176.0/21 le 32
-ip prefix-list PL_1:1200_REMEDIATION_PREFIXES seq 115 permit 10.166.192.0/18 le 32
-ip prefix-list PL_1:1200_REMEDIATION_PREFIXES seq 120 permit 10.167.0.0/21 le 32
-ip prefix-list PL_1:1200_REMEDIATION_PREFIXES seq 125 permit 10.167.8.0/22 le 32
-ip prefix-list PL_1:1200_REMEDIATION_PREFIXES seq 130 permit 10.176.128.0/18 le 32
-ip prefix-list PL_1:1200_REMEDIATION_PREFIXES seq 135 permit 10.181.192.0/20 le 32
-ip prefix-list PL_1:1200_REMEDIATION_PREFIXES seq 140 permit 10.255.17.224/28 le 32
-ip prefix-list PL_1:1200_REMEDIATION_PREFIXES seq 145 permit 10.255.120.0/24 le 32
-ip prefix-list PL_1:1200_REMEDIATION_PREFIXES seq 150 permit 26.1.0.0/16 le 32
-ip prefix-list PL_1:1200_REMEDIATION_PREFIXES seq 155 permit 26.26.0.0/16 le 32
+ip prefix-list PL_1:1200_REMEDIATION_PREFIXES seq 5 permit 10.6.240.0/21 le 32
+ip prefix-list PL_1:1200_REMEDIATION_PREFIXES seq 10 permit 10.7.72.0/22 le 32
+ip prefix-list PL_1:1200_REMEDIATION_PREFIXES seq 15 permit 10.7.216.0/22 le 32
+ip prefix-list PL_1:1200_REMEDIATION_PREFIXES seq 20 permit 10.33.0.0/19 le 32
+ip prefix-list PL_1:1200_REMEDIATION_PREFIXES seq 25 permit 10.69.200.0/22 le 32
+ip prefix-list PL_1:1200_REMEDIATION_PREFIXES seq 30 permit 10.80.56.128/26 le 32
+ip prefix-list PL_1:1200_REMEDIATION_PREFIXES seq 35 permit 10.81.184.0/25 le 32
+ip prefix-list PL_1:1200_REMEDIATION_PREFIXES seq 40 permit 10.81.224.0/23 le 32
+ip prefix-list PL_1:1200_REMEDIATION_PREFIXES seq 45 permit 10.92.0.0/19 le 32
+ip prefix-list PL_1:1200_REMEDIATION_PREFIXES seq 50 permit 10.92.64.0/21 le 32
+ip prefix-list PL_1:1200_REMEDIATION_PREFIXES seq 55 permit 10.92.206.0/24 le 32
+ip prefix-list PL_1:1200_REMEDIATION_PREFIXES seq 60 permit 10.92.252.0/23 le 32
+ip prefix-list PL_1:1200_REMEDIATION_PREFIXES seq 65 permit 10.110.0.0/16 le 32
+ip prefix-list PL_1:1200_REMEDIATION_PREFIXES seq 70 permit 10.129.0.0/16 le 32
+ip prefix-list PL_1:1200_REMEDIATION_PREFIXES seq 75 permit 10.132.24.0/22 le 32
+ip prefix-list PL_1:1200_REMEDIATION_PREFIXES seq 80 permit 10.139.0.0/16 le 32
+ip prefix-list PL_1:1200_REMEDIATION_PREFIXES seq 85 permit 10.160.128.0/18 le 32
+ip prefix-list PL_1:1200_REMEDIATION_PREFIXES seq 90 permit 10.161.64.0/19 le 32
+ip prefix-list PL_1:1200_REMEDIATION_PREFIXES seq 95 permit 10.166.128.0/19 le 32
+ip prefix-list PL_1:1200_REMEDIATION_PREFIXES seq 100 permit 10.166.160.0/20 le 32
+ip prefix-list PL_1:1200_REMEDIATION_PREFIXES seq 105 permit 10.166.176.0/21 le 32
+ip prefix-list PL_1:1200_REMEDIATION_PREFIXES seq 110 permit 10.166.192.0/18 le 32
+ip prefix-list PL_1:1200_REMEDIATION_PREFIXES seq 115 permit 10.167.0.0/21 le 32
+ip prefix-list PL_1:1200_REMEDIATION_PREFIXES seq 120 permit 10.167.8.0/22 le 32
+ip prefix-list PL_1:1200_REMEDIATION_PREFIXES seq 125 permit 10.176.128.0/18 le 32
+ip prefix-list PL_1:1200_REMEDIATION_PREFIXES seq 130 permit 10.181.192.0/20 le 32
+ip prefix-list PL_1:1200_REMEDIATION_PREFIXES seq 135 permit 10.255.17.224/28 le 32
+ip prefix-list PL_1:1200_REMEDIATION_PREFIXES seq 140 permit 10.255.120.0/24 le 32
 ip prefix-list PL_1:1200_REMEDIATION_PREFIXES seq 500000 deny 0.0.0.0/0 le 32
 !
 ip prefix-list PL_1:1300_ALLOWED_PREFIXES description PL_1:1300_ALLOWED_PREFIXES TEST DESCRIPTION
-ip prefix-list PL_1:1300_ALLOWED_PREFIXES seq 5 permit 2.2.2.0/31 le 32
-ip prefix-list PL_1:1300_ALLOWED_PREFIXES seq 10 permit 2.2.2.2/32
-ip prefix-list PL_1:1300_ALLOWED_PREFIXES seq 15 permit 10.42.44.0/22 le 32
-ip prefix-list PL_1:1300_ALLOWED_PREFIXES seq 20 permit 10.42.172.0/22 le 32
-ip prefix-list PL_1:1300_ALLOWED_PREFIXES seq 25 permit 10.73.40.0/21 le 32
-ip prefix-list PL_1:1300_ALLOWED_PREFIXES seq 30 permit 10.73.48.0/21 le 32
-ip prefix-list PL_1:1300_ALLOWED_PREFIXES seq 35 permit 10.73.215.0/24 le 32
-ip prefix-list PL_1:1300_ALLOWED_PREFIXES seq 40 permit 10.73.216.0/24 le 32
-ip prefix-list PL_1:1300_ALLOWED_PREFIXES seq 45 permit 10.84.192.0/20 le 32
-ip prefix-list PL_1:1300_ALLOWED_PREFIXES seq 50 permit 10.90.192.0/18 le 32
-ip prefix-list PL_1:1300_ALLOWED_PREFIXES seq 55 permit 10.93.40.0/21 le 32
-ip prefix-list PL_1:1300_ALLOWED_PREFIXES seq 60 permit 10.93.48.0/21 le 32
-ip prefix-list PL_1:1300_ALLOWED_PREFIXES seq 65 permit 10.93.215.0/24 le 32
-ip prefix-list PL_1:1300_ALLOWED_PREFIXES seq 70 permit 10.93.216.0/24 le 32
-ip prefix-list PL_1:1300_ALLOWED_PREFIXES seq 75 permit 10.117.0.0/24 le 32
-ip prefix-list PL_1:1300_ALLOWED_PREFIXES seq 80 permit 10.137.24.0/21 le 32
-ip prefix-list PL_1:1300_ALLOWED_PREFIXES seq 85 permit 10.152.32.0/20 le 32
-ip prefix-list PL_1:1300_ALLOWED_PREFIXES seq 90 permit 10.157.64.0/19 le 32
-ip prefix-list PL_1:1300_ALLOWED_PREFIXES seq 95 permit 10.183.192.0/18 le 32
-ip prefix-list PL_1:1300_ALLOWED_PREFIXES seq 100 permit 10.189.236.0/22 le 32
-ip prefix-list PL_1:1300_ALLOWED_PREFIXES seq 105 permit 10.220.16.0/22 le 32
-ip prefix-list PL_1:1300_ALLOWED_PREFIXES seq 110 permit 10.220.80.0/22 le 32
-ip prefix-list PL_1:1300_ALLOWED_PREFIXES seq 115 permit 10.225.32.0/19 le 32
-ip prefix-list PL_1:1300_ALLOWED_PREFIXES seq 120 permit 13.1.0.0/16 le 32
-ip prefix-list PL_1:1300_ALLOWED_PREFIXES seq 125 permit 13.13.0.0/16 le 32
+ip prefix-list PL_1:1300_ALLOWED_PREFIXES seq 5 permit 10.42.44.0/22 le 32
+ip prefix-list PL_1:1300_ALLOWED_PREFIXES seq 10 permit 10.42.172.0/22 le 32
+ip prefix-list PL_1:1300_ALLOWED_PREFIXES seq 15 permit 10.73.40.0/21 le 32
+ip prefix-list PL_1:1300_ALLOWED_PREFIXES seq 20 permit 10.73.48.0/21 le 32
+ip prefix-list PL_1:1300_ALLOWED_PREFIXES seq 25 permit 10.73.215.0/24 le 32
+ip prefix-list PL_1:1300_ALLOWED_PREFIXES seq 30 permit 10.73.216.0/24 le 32
+ip prefix-list PL_1:1300_ALLOWED_PREFIXES seq 35 permit 10.84.192.0/20 le 32
+ip prefix-list PL_1:1300_ALLOWED_PREFIXES seq 40 permit 10.90.192.0/18 le 32
+ip prefix-list PL_1:1300_ALLOWED_PREFIXES seq 45 permit 10.93.40.0/21 le 32
+ip prefix-list PL_1:1300_ALLOWED_PREFIXES seq 50 permit 10.93.48.0/21 le 32
+ip prefix-list PL_1:1300_ALLOWED_PREFIXES seq 55 permit 10.93.215.0/24 le 32
+ip prefix-list PL_1:1300_ALLOWED_PREFIXES seq 60 permit 10.93.216.0/24 le 32
+ip prefix-list PL_1:1300_ALLOWED_PREFIXES seq 65 permit 10.117.0.0/24 le 32
+ip prefix-list PL_1:1300_ALLOWED_PREFIXES seq 70 permit 10.137.24.0/21 le 32
+ip prefix-list PL_1:1300_ALLOWED_PREFIXES seq 75 permit 10.152.32.0/20 le 32
+ip prefix-list PL_1:1300_ALLOWED_PREFIXES seq 80 permit 10.157.64.0/19 le 32
+ip prefix-list PL_1:1300_ALLOWED_PREFIXES seq 85 permit 10.183.192.0/18 le 32
+ip prefix-list PL_1:1300_ALLOWED_PREFIXES seq 90 permit 10.189.236.0/22 le 32
+ip prefix-list PL_1:1300_ALLOWED_PREFIXES seq 95 permit 10.220.16.0/22 le 32
+ip prefix-list PL_1:1300_ALLOWED_PREFIXES seq 100 permit 10.220.80.0/22 le 32
+ip prefix-list PL_1:1300_ALLOWED_PREFIXES seq 105 permit 10.225.32.0/19 le 32
 ip prefix-list PL_1:1300_ALLOWED_PREFIXES seq 500000 deny 0.0.0.0/0 le 32
 !
 ip prefix-list PL_1:1300_REMEDIATION_PREFIXES description PL_1:1300_REMEDIATION_PREFIXES TEST DESCRIPTION
@@ -510,36 +514,29 @@ ip prefix-list PL_1:1500_ALLOWED_PREFIXES seq 210 permit 10.229.96.0/19 le 32
 ip prefix-list PL_1:1500_ALLOWED_PREFIXES seq 500000 deny 0.0.0.0/0 le 32
 !
 ip prefix-list PL_1:1500_REMEDIATION_PREFIXES description PL_1:1500_REMEDIATION_PREFIXES TEST DESCRIPTION
-ip prefix-list PL_1:1500_REMEDIATION_PREFIXES seq 5 permit 1.1.1.1/32
-ip prefix-list PL_1:1500_REMEDIATION_PREFIXES seq 10 permit 3.3.3.3/32
-ip prefix-list PL_1:1500_REMEDIATION_PREFIXES seq 15 permit 6.6.6.6/32
-ip prefix-list PL_1:1500_REMEDIATION_PREFIXES seq 20 permit 10.6.224.0/20 le 32
-ip prefix-list PL_1:1500_REMEDIATION_PREFIXES seq 25 permit 10.6.240.0/21 le 32
-ip prefix-list PL_1:1500_REMEDIATION_PREFIXES seq 30 permit 10.7.72.0/22 le 32
-ip prefix-list PL_1:1500_REMEDIATION_PREFIXES seq 35 permit 10.7.96.0/20 le 32
-ip prefix-list PL_1:1500_REMEDIATION_PREFIXES seq 40 permit 10.7.216.0/22 le 32
-ip prefix-list PL_1:1500_REMEDIATION_PREFIXES seq 45 permit 10.7.224.0/20 le 32
-ip prefix-list PL_1:1500_REMEDIATION_PREFIXES seq 50 permit 10.110.0.0/16 le 32
-ip prefix-list PL_1:1500_REMEDIATION_PREFIXES seq 55 permit 10.129.0.0/16 le 32
-ip prefix-list PL_1:1500_REMEDIATION_PREFIXES seq 60 permit 10.139.0.0/16 le 32
-ip prefix-list PL_1:1500_REMEDIATION_PREFIXES seq 65 permit 10.143.48.0/21 le 32
-ip prefix-list PL_1:1500_REMEDIATION_PREFIXES seq 70 permit 10.143.88.0/21 le 32
-ip prefix-list PL_1:1500_REMEDIATION_PREFIXES seq 75 permit 10.160.192.0/18 le 32
-ip prefix-list PL_1:1500_REMEDIATION_PREFIXES seq 80 permit 10.161.112.0/20 le 32
-ip prefix-list PL_1:1500_REMEDIATION_PREFIXES seq 85 permit 10.161.160.0/22 le 32
-ip prefix-list PL_1:1500_REMEDIATION_PREFIXES seq 90 permit 10.166.128.0/19 le 32
-ip prefix-list PL_1:1500_REMEDIATION_PREFIXES seq 95 permit 10.166.160.0/20 le 32
-ip prefix-list PL_1:1500_REMEDIATION_PREFIXES seq 100 permit 10.166.176.0/21 le 32
-ip prefix-list PL_1:1500_REMEDIATION_PREFIXES seq 105 permit 10.166.192.0/18 le 32
-ip prefix-list PL_1:1500_REMEDIATION_PREFIXES seq 110 permit 10.167.0.0/21 le 32
-ip prefix-list PL_1:1500_REMEDIATION_PREFIXES seq 115 permit 10.167.8.0/22 le 32
-ip prefix-list PL_1:1500_REMEDIATION_PREFIXES seq 120 permit 10.176.0.0/19 le 32
-ip prefix-list PL_1:1500_REMEDIATION_PREFIXES seq 125 permit 10.181.192.0/20 le 32
-ip prefix-list PL_1:1500_REMEDIATION_PREFIXES seq 130 permit 12.1.0.0/16 le 32
-ip prefix-list PL_1:1500_REMEDIATION_PREFIXES seq 135 permit 12.2.0.0/18 le 32
-ip prefix-list PL_1:1500_REMEDIATION_PREFIXES seq 140 permit 12.12.0.0/16 le 32
-ip prefix-list PL_1:1500_REMEDIATION_PREFIXES seq 145 permit 26.1.0.0/16 le 32
-ip prefix-list PL_1:1500_REMEDIATION_PREFIXES seq 150 permit 26.26.0.0/16 le 32
+ip prefix-list PL_1:1500_REMEDIATION_PREFIXES seq 5 permit 6.6.6.6/32
+ip prefix-list PL_1:1500_REMEDIATION_PREFIXES seq 10 permit 10.6.224.0/20 le 32
+ip prefix-list PL_1:1500_REMEDIATION_PREFIXES seq 15 permit 10.6.240.0/21 le 32
+ip prefix-list PL_1:1500_REMEDIATION_PREFIXES seq 20 permit 10.7.72.0/22 le 32
+ip prefix-list PL_1:1500_REMEDIATION_PREFIXES seq 25 permit 10.7.96.0/20 le 32
+ip prefix-list PL_1:1500_REMEDIATION_PREFIXES seq 30 permit 10.7.216.0/22 le 32
+ip prefix-list PL_1:1500_REMEDIATION_PREFIXES seq 35 permit 10.7.224.0/20 le 32
+ip prefix-list PL_1:1500_REMEDIATION_PREFIXES seq 40 permit 10.110.0.0/16 le 32
+ip prefix-list PL_1:1500_REMEDIATION_PREFIXES seq 45 permit 10.129.0.0/16 le 32
+ip prefix-list PL_1:1500_REMEDIATION_PREFIXES seq 50 permit 10.139.0.0/16 le 32
+ip prefix-list PL_1:1500_REMEDIATION_PREFIXES seq 55 permit 10.143.48.0/21 le 32
+ip prefix-list PL_1:1500_REMEDIATION_PREFIXES seq 60 permit 10.143.88.0/21 le 32
+ip prefix-list PL_1:1500_REMEDIATION_PREFIXES seq 65 permit 10.160.192.0/18 le 32
+ip prefix-list PL_1:1500_REMEDIATION_PREFIXES seq 70 permit 10.161.112.0/20 le 32
+ip prefix-list PL_1:1500_REMEDIATION_PREFIXES seq 75 permit 10.161.160.0/22 le 32
+ip prefix-list PL_1:1500_REMEDIATION_PREFIXES seq 80 permit 10.166.128.0/19 le 32
+ip prefix-list PL_1:1500_REMEDIATION_PREFIXES seq 85 permit 10.166.160.0/20 le 32
+ip prefix-list PL_1:1500_REMEDIATION_PREFIXES seq 90 permit 10.166.176.0/21 le 32
+ip prefix-list PL_1:1500_REMEDIATION_PREFIXES seq 95 permit 10.166.192.0/18 le 32
+ip prefix-list PL_1:1500_REMEDIATION_PREFIXES seq 100 permit 10.167.0.0/21 le 32
+ip prefix-list PL_1:1500_REMEDIATION_PREFIXES seq 105 permit 10.167.8.0/22 le 32
+ip prefix-list PL_1:1500_REMEDIATION_PREFIXES seq 110 permit 10.176.0.0/19 le 32
+ip prefix-list PL_1:1500_REMEDIATION_PREFIXES seq 115 permit 10.181.192.0/20 le 32
 ip prefix-list PL_1:1500_REMEDIATION_PREFIXES seq 500000 deny 0.0.0.0/0 le 32
 !
 ip prefix-list PL_1:1600_ALLOWED_PREFIXES description PL_1:1600_ALLOWED_PREFIXES TEST DESCRIPTION
@@ -588,44 +585,37 @@ ip prefix-list PL_1:1600_ALLOWED_PREFIXES seq 210 permit 10.230.128.0/19 le 32
 ip prefix-list PL_1:1600_ALLOWED_PREFIXES seq 500000 deny 0.0.0.0/0 le 32
 !
 ip prefix-list PL_1:1600_REMEDIATION_PREFIXES description PL_1:1600_REMEDIATION_PREFIXES TEST DESCRIPTION
-ip prefix-list PL_1:1600_REMEDIATION_PREFIXES seq 5 permit 1.1.1.1/32
-ip prefix-list PL_1:1600_REMEDIATION_PREFIXES seq 10 permit 3.3.3.3/32
-ip prefix-list PL_1:1600_REMEDIATION_PREFIXES seq 15 permit 6.6.6.6/32
-ip prefix-list PL_1:1600_REMEDIATION_PREFIXES seq 20 permit 10.6.240.0/21 le 32
-ip prefix-list PL_1:1600_REMEDIATION_PREFIXES seq 25 permit 10.7.72.0/22 le 32
-ip prefix-list PL_1:1600_REMEDIATION_PREFIXES seq 30 permit 10.7.216.0/22 le 32
-ip prefix-list PL_1:1600_REMEDIATION_PREFIXES seq 35 permit 10.83.132.11/32
-ip prefix-list PL_1:1600_REMEDIATION_PREFIXES seq 40 permit 10.110.0.0/16 le 32
-ip prefix-list PL_1:1600_REMEDIATION_PREFIXES seq 45 permit 10.129.0.0/16 le 32
-ip prefix-list PL_1:1600_REMEDIATION_PREFIXES seq 50 permit 10.139.0.0/16 le 32
-ip prefix-list PL_1:1600_REMEDIATION_PREFIXES seq 55 permit 10.143.152.0/21 le 32
-ip prefix-list PL_1:1600_REMEDIATION_PREFIXES seq 60 permit 10.160.0.0/18 le 32
-ip prefix-list PL_1:1600_REMEDIATION_PREFIXES seq 65 permit 10.161.0.0/18 le 32
-ip prefix-list PL_1:1600_REMEDIATION_PREFIXES seq 70 permit 10.161.164.0/22 le 32
-ip prefix-list PL_1:1600_REMEDIATION_PREFIXES seq 75 permit 10.161.174.0/24 le 32
-ip prefix-list PL_1:1600_REMEDIATION_PREFIXES seq 80 permit 10.161.175.0/25 le 32
-ip prefix-list PL_1:1600_REMEDIATION_PREFIXES seq 85 permit 10.166.128.0/19 le 32
-ip prefix-list PL_1:1600_REMEDIATION_PREFIXES seq 90 permit 10.166.160.0/20 le 32
-ip prefix-list PL_1:1600_REMEDIATION_PREFIXES seq 95 permit 10.166.176.0/21 le 32
-ip prefix-list PL_1:1600_REMEDIATION_PREFIXES seq 100 permit 10.166.192.0/18 le 32
-ip prefix-list PL_1:1600_REMEDIATION_PREFIXES seq 105 permit 10.167.0.0/21 le 32
-ip prefix-list PL_1:1600_REMEDIATION_PREFIXES seq 110 permit 10.167.8.0/22 le 32
-ip prefix-list PL_1:1600_REMEDIATION_PREFIXES seq 115 permit 10.169.70.0/24 le 32
-ip prefix-list PL_1:1600_REMEDIATION_PREFIXES seq 120 permit 10.169.94.0/23 le 32
-ip prefix-list PL_1:1600_REMEDIATION_PREFIXES seq 125 permit 10.169.192.0/24 le 32
-ip prefix-list PL_1:1600_REMEDIATION_PREFIXES seq 130 permit 10.169.209.128/25 le 32
-ip prefix-list PL_1:1600_REMEDIATION_PREFIXES seq 135 permit 10.172.128.0/18 le 32
-ip prefix-list PL_1:1600_REMEDIATION_PREFIXES seq 140 permit 10.176.64.0/18 le 32
-ip prefix-list PL_1:1600_REMEDIATION_PREFIXES seq 145 permit 10.177.64.0/19 le 32
-ip prefix-list PL_1:1600_REMEDIATION_PREFIXES seq 150 permit 10.177.96.0/21 le 32
-ip prefix-list PL_1:1600_REMEDIATION_PREFIXES seq 155 permit 10.181.192.0/20 le 32
-ip prefix-list PL_1:1600_REMEDIATION_PREFIXES seq 160 permit 10.210.16.0/21 le 32
-ip prefix-list PL_1:1600_REMEDIATION_PREFIXES seq 165 permit 10.230.228.0/22 le 32
-ip prefix-list PL_1:1600_REMEDIATION_PREFIXES seq 170 permit 12.1.0.0/16 le 32
-ip prefix-list PL_1:1600_REMEDIATION_PREFIXES seq 175 permit 12.2.0.0/18 le 32
-ip prefix-list PL_1:1600_REMEDIATION_PREFIXES seq 180 permit 12.12.0.0/16 le 32
-ip prefix-list PL_1:1600_REMEDIATION_PREFIXES seq 185 permit 26.1.0.0/16 le 32
-ip prefix-list PL_1:1600_REMEDIATION_PREFIXES seq 190 permit 26.26.0.0/16 le 32
+ip prefix-list PL_1:1600_REMEDIATION_PREFIXES seq 5 permit 6.6.6.6/32
+ip prefix-list PL_1:1600_REMEDIATION_PREFIXES seq 10 permit 10.6.240.0/21 le 32
+ip prefix-list PL_1:1600_REMEDIATION_PREFIXES seq 15 permit 10.7.72.0/22 le 32
+ip prefix-list PL_1:1600_REMEDIATION_PREFIXES seq 20 permit 10.7.216.0/22 le 32
+ip prefix-list PL_1:1600_REMEDIATION_PREFIXES seq 25 permit 10.83.132.11/32
+ip prefix-list PL_1:1600_REMEDIATION_PREFIXES seq 30 permit 10.110.0.0/16 le 32
+ip prefix-list PL_1:1600_REMEDIATION_PREFIXES seq 35 permit 10.129.0.0/16 le 32
+ip prefix-list PL_1:1600_REMEDIATION_PREFIXES seq 40 permit 10.139.0.0/16 le 32
+ip prefix-list PL_1:1600_REMEDIATION_PREFIXES seq 45 permit 10.143.152.0/21 le 32
+ip prefix-list PL_1:1600_REMEDIATION_PREFIXES seq 50 permit 10.160.0.0/18 le 32
+ip prefix-list PL_1:1600_REMEDIATION_PREFIXES seq 55 permit 10.161.0.0/18 le 32
+ip prefix-list PL_1:1600_REMEDIATION_PREFIXES seq 60 permit 10.161.164.0/22 le 32
+ip prefix-list PL_1:1600_REMEDIATION_PREFIXES seq 65 permit 10.161.174.0/24 le 32
+ip prefix-list PL_1:1600_REMEDIATION_PREFIXES seq 70 permit 10.161.175.0/25 le 32
+ip prefix-list PL_1:1600_REMEDIATION_PREFIXES seq 75 permit 10.166.128.0/19 le 32
+ip prefix-list PL_1:1600_REMEDIATION_PREFIXES seq 80 permit 10.166.160.0/20 le 32
+ip prefix-list PL_1:1600_REMEDIATION_PREFIXES seq 85 permit 10.166.176.0/21 le 32
+ip prefix-list PL_1:1600_REMEDIATION_PREFIXES seq 90 permit 10.166.192.0/18 le 32
+ip prefix-list PL_1:1600_REMEDIATION_PREFIXES seq 95 permit 10.167.0.0/21 le 32
+ip prefix-list PL_1:1600_REMEDIATION_PREFIXES seq 100 permit 10.167.8.0/22 le 32
+ip prefix-list PL_1:1600_REMEDIATION_PREFIXES seq 105 permit 10.169.70.0/24 le 32
+ip prefix-list PL_1:1600_REMEDIATION_PREFIXES seq 110 permit 10.169.94.0/23 le 32
+ip prefix-list PL_1:1600_REMEDIATION_PREFIXES seq 115 permit 10.169.192.0/24 le 32
+ip prefix-list PL_1:1600_REMEDIATION_PREFIXES seq 120 permit 10.169.209.128/25 le 32
+ip prefix-list PL_1:1600_REMEDIATION_PREFIXES seq 125 permit 10.172.128.0/18 le 32
+ip prefix-list PL_1:1600_REMEDIATION_PREFIXES seq 130 permit 10.176.64.0/18 le 32
+ip prefix-list PL_1:1600_REMEDIATION_PREFIXES seq 135 permit 10.177.64.0/19 le 32
+ip prefix-list PL_1:1600_REMEDIATION_PREFIXES seq 140 permit 10.177.96.0/21 le 32
+ip prefix-list PL_1:1600_REMEDIATION_PREFIXES seq 145 permit 10.181.192.0/20 le 32
+ip prefix-list PL_1:1600_REMEDIATION_PREFIXES seq 150 permit 10.210.16.0/21 le 32
+ip prefix-list PL_1:1600_REMEDIATION_PREFIXES seq 155 permit 10.230.228.0/22 le 32
 ip prefix-list PL_1:1600_REMEDIATION_PREFIXES seq 500000 deny 0.0.0.0/0 le 32
 !
 ip prefix-list PL_1:1700_ALLOWED_PREFIXES description PL_1:1700_ALLOWED_PREFIXES TEST DESCRIPTION
@@ -877,102 +867,95 @@ ip prefix-list PL_1:2100_ALLOWED_PREFIXES seq 210 permit 10.230.228.0/22 le 32
 ip prefix-list PL_1:2100_ALLOWED_PREFIXES seq 500000 deny 0.0.0.0/0 le 32
 !
 ip prefix-list PL_1:2100_REMEDIATION_PREFIXES description PL_1:2100_REMEDIATION_PREFIXES TEST DESCRIPTION
-ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 5 permit 1.1.1.1/32
-ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 10 permit 3.3.3.3/32
-ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 15 permit 6.6.6.6/32
-ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 20 permit 10.6.128.0/18 le 32
-ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 25 permit 10.6.192.0/20 le 32
-ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 30 permit 10.6.224.0/20 le 32
-ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 35 permit 10.6.240.0/21 le 32
-ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 40 permit 10.7.0.0/19 le 32
-ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 45 permit 10.7.64.0/22 le 32
-ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 50 permit 10.7.72.0/22 le 32
-ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 55 permit 10.7.96.0/20 le 32
-ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 60 permit 10.7.160.0/19 le 32
-ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 65 permit 10.7.192.0/20 le 32
-ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 70 permit 10.7.216.0/22 le 32
-ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 75 permit 10.7.224.0/20 le 32
-ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 80 permit 10.42.12.0/22 le 32
-ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 85 permit 10.42.16.0/22 le 32
-ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 90 permit 10.42.48.0/22 le 32
-ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 95 permit 10.42.140.0/22 le 32
-ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 100 permit 10.42.144.0/22 le 32
-ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 105 permit 10.42.180.0/22 le 32
-ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 110 permit 10.73.88.0/21 le 32
-ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 115 permit 10.73.96.0/21 le 32
-ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 120 permit 10.73.168.0/21 le 32
-ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 125 permit 10.73.176.0/20 le 32
-ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 130 permit 10.73.192.0/21 le 32
-ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 135 permit 10.79.0.0/17 le 32
-ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 140 permit 10.80.0.0/18 le 32
-ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 145 permit 10.80.192.0/18 le 32
-ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 150 permit 10.81.0.0/18 le 32
-ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 155 permit 10.81.128.0/17 le 32
-ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 160 permit 10.83.0.0/18 le 32
-ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 165 permit 10.83.192.0/18 le 32
-ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 170 permit 10.84.64.0/19 le 32
-ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 175 permit 10.93.88.0/21 le 32
-ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 180 permit 10.93.96.0/21 le 32
-ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 185 permit 10.93.168.0/21 le 32
-ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 190 permit 10.93.176.0/20 le 32
-ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 195 permit 10.93.192.0/21 le 32
-ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 200 permit 10.96.64.0/18 le 32
-ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 205 permit 10.96.128.0/18 le 32
-ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 210 permit 10.96.192.0/19 le 32
-ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 215 permit 10.110.0.0/16 le 32
-ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 220 permit 10.129.0.0/16 le 32
-ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 225 permit 10.130.0.0/16 le 32
-ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 230 permit 10.136.64.0/18 le 32
-ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 235 permit 10.139.0.0/16 le 32
-ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 240 permit 10.143.88.0/21 le 32
-ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 245 permit 10.160.64.0/18 le 32
-ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 250 permit 10.160.192.0/18 le 32
-ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 255 permit 10.161.96.0/19 le 32
-ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 260 permit 10.165.32.0/21 le 32
-ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 265 permit 10.166.0.0/20 le 32
-ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 270 permit 10.166.32.0/20 le 32
-ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 275 permit 10.166.96.0/21 le 32
-ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 280 permit 10.166.128.0/19 le 32
-ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 285 permit 10.166.160.0/20 le 32
-ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 290 permit 10.166.176.0/21 le 32
-ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 295 permit 10.166.192.0/18 le 32
-ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 300 permit 10.167.0.0/21 le 32
-ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 305 permit 10.167.8.0/22 le 32
-ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 310 permit 10.169.0.0/18 le 32
-ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 315 permit 10.169.78.0/24 le 32
-ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 320 permit 10.169.97.128/26 le 32
-ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 325 permit 10.169.192.0/18 le 32
-ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 330 permit 10.172.0.0/18 le 32
-ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 335 permit 10.172.128.0/18 le 32
-ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 340 permit 10.176.0.0/18 le 32
-ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 345 permit 10.177.0.0/19 le 32
-ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 350 permit 10.177.64.0/19 le 32
-ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 355 permit 10.177.96.0/21 le 32
-ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 360 permit 10.181.192.0/20 le 32
-ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 365 permit 10.183.0.0/19 le 32
-ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 370 permit 10.184.32.0/20 le 32
-ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 375 permit 10.185.0.0/20 le 32
-ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 380 permit 10.185.48.0/20 le 32
-ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 385 permit 10.185.192.0/22 le 32
-ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 390 permit 10.185.208.0/20 le 32
-ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 395 permit 10.185.224.0/20 le 32
-ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 400 permit 10.186.0.0/20 le 32
-ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 405 permit 10.186.48.0/20 le 32
-ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 410 permit 10.187.0.0/19 le 32
-ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 415 permit 10.188.0.0/18 le 32
-ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 420 permit 10.188.192.0/18 le 32
-ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 425 permit 10.189.0.0/20 le 32
-ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 430 permit 10.189.48.0/20 le 32
-ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 435 permit 10.189.192.0/19 le 32
-ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 440 permit 10.190.64.0/20 le 32
-ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 445 permit 10.210.16.0/21 le 32
-ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 450 permit 10.210.40.0/21 le 32
-ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 455 permit 10.255.124.96/30 le 32
-ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 460 permit 12.1.0.0/16 le 32
-ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 465 permit 12.2.0.0/18 le 32
-ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 470 permit 12.12.0.0/16 le 32
-ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 475 permit 26.1.0.0/16 le 32
-ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 480 permit 26.26.0.0/16 le 32
+ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 5 permit 6.6.6.6/32
+ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 10 permit 10.6.128.0/18 le 32
+ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 15 permit 10.6.192.0/20 le 32
+ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 20 permit 10.6.224.0/20 le 32
+ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 25 permit 10.6.240.0/21 le 32
+ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 30 permit 10.7.0.0/19 le 32
+ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 35 permit 10.7.64.0/22 le 32
+ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 40 permit 10.7.72.0/22 le 32
+ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 45 permit 10.7.96.0/20 le 32
+ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 50 permit 10.7.160.0/19 le 32
+ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 55 permit 10.7.192.0/20 le 32
+ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 60 permit 10.7.216.0/22 le 32
+ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 65 permit 10.7.224.0/20 le 32
+ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 70 permit 10.42.12.0/22 le 32
+ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 75 permit 10.42.16.0/22 le 32
+ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 80 permit 10.42.48.0/22 le 32
+ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 85 permit 10.42.140.0/22 le 32
+ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 90 permit 10.42.144.0/22 le 32
+ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 95 permit 10.42.180.0/22 le 32
+ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 100 permit 10.73.88.0/21 le 32
+ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 105 permit 10.73.96.0/21 le 32
+ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 110 permit 10.73.168.0/21 le 32
+ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 115 permit 10.73.176.0/20 le 32
+ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 120 permit 10.73.192.0/21 le 32
+ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 125 permit 10.79.0.0/17 le 32
+ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 130 permit 10.80.0.0/18 le 32
+ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 135 permit 10.80.192.0/18 le 32
+ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 140 permit 10.81.0.0/18 le 32
+ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 145 permit 10.81.128.0/17 le 32
+ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 150 permit 10.83.0.0/18 le 32
+ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 155 permit 10.83.192.0/18 le 32
+ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 160 permit 10.84.64.0/19 le 32
+ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 165 permit 10.93.88.0/21 le 32
+ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 170 permit 10.93.96.0/21 le 32
+ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 175 permit 10.93.168.0/21 le 32
+ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 180 permit 10.93.176.0/20 le 32
+ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 185 permit 10.93.192.0/21 le 32
+ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 190 permit 10.96.64.0/18 le 32
+ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 195 permit 10.96.128.0/18 le 32
+ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 200 permit 10.96.192.0/19 le 32
+ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 205 permit 10.110.0.0/16 le 32
+ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 210 permit 10.129.0.0/16 le 32
+ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 215 permit 10.130.0.0/16 le 32
+ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 220 permit 10.136.64.0/18 le 32
+ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 225 permit 10.139.0.0/16 le 32
+ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 230 permit 10.143.88.0/21 le 32
+ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 235 permit 10.160.64.0/18 le 32
+ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 240 permit 10.160.192.0/18 le 32
+ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 245 permit 10.161.96.0/19 le 32
+ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 250 permit 10.165.32.0/21 le 32
+ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 255 permit 10.166.0.0/20 le 32
+ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 260 permit 10.166.32.0/20 le 32
+ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 265 permit 10.166.96.0/21 le 32
+ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 270 permit 10.166.128.0/19 le 32
+ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 275 permit 10.166.160.0/20 le 32
+ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 280 permit 10.166.176.0/21 le 32
+ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 285 permit 10.166.192.0/18 le 32
+ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 290 permit 10.167.0.0/21 le 32
+ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 295 permit 10.167.8.0/22 le 32
+ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 300 permit 10.169.0.0/18 le 32
+ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 305 permit 10.169.78.0/24 le 32
+ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 310 permit 10.169.97.128/26 le 32
+ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 315 permit 10.169.192.0/18 le 32
+ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 320 permit 10.172.0.0/18 le 32
+ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 325 permit 10.172.128.0/18 le 32
+ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 330 permit 10.176.0.0/18 le 32
+ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 335 permit 10.177.0.0/19 le 32
+ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 340 permit 10.177.64.0/19 le 32
+ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 345 permit 10.177.96.0/21 le 32
+ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 350 permit 10.181.192.0/20 le 32
+ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 355 permit 10.183.0.0/19 le 32
+ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 360 permit 10.184.32.0/20 le 32
+ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 365 permit 10.185.0.0/20 le 32
+ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 370 permit 10.185.48.0/20 le 32
+ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 375 permit 10.185.192.0/22 le 32
+ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 380 permit 10.185.208.0/20 le 32
+ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 385 permit 10.185.224.0/20 le 32
+ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 390 permit 10.186.0.0/20 le 32
+ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 395 permit 10.186.48.0/20 le 32
+ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 400 permit 10.187.0.0/19 le 32
+ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 405 permit 10.188.0.0/18 le 32
+ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 410 permit 10.188.192.0/18 le 32
+ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 415 permit 10.189.0.0/20 le 32
+ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 420 permit 10.189.48.0/20 le 32
+ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 425 permit 10.189.192.0/19 le 32
+ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 430 permit 10.190.64.0/20 le 32
+ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 435 permit 10.210.16.0/21 le 32
+ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 440 permit 10.210.40.0/21 le 32
+ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 445 permit 10.255.124.96/30 le 32
 ip prefix-list PL_1:2100_REMEDIATION_PREFIXES seq 500000 deny 0.0.0.0/0 le 32
 !
 ip prefix-list PL_1:2200_ALLOWED_PREFIXES description PL_1:2200_ALLOWED_PREFIXES TEST DESCRIPTION
@@ -1025,56 +1008,49 @@ ip prefix-list PL_1:2500_REMEDIATION_PREFIXES seq 15 permit 10.166.192.0/18 le 3
 ip prefix-list PL_1:2500_REMEDIATION_PREFIXES seq 500000 deny 0.0.0.0/0 le 32
 !
 ip prefix-list PL_1:2600_ALLOWED_PREFIXES description PL_1:2600_ALLOWED_PREFIXES TEST DESCRIPTION
-ip prefix-list PL_1:2600_ALLOWED_PREFIXES seq 5 permit 3.3.3.3/32
-ip prefix-list PL_1:2600_ALLOWED_PREFIXES seq 10 permit 10.6.192.0/20 le 32
-ip prefix-list PL_1:2600_ALLOWED_PREFIXES seq 15 permit 10.7.64.0/22 le 32
-ip prefix-list PL_1:2600_ALLOWED_PREFIXES seq 20 permit 10.7.192.0/20 le 32
-ip prefix-list PL_1:2600_ALLOWED_PREFIXES seq 25 permit 10.42.48.0/22 le 32
-ip prefix-list PL_1:2600_ALLOWED_PREFIXES seq 30 permit 10.42.180.0/22 le 32
-ip prefix-list PL_1:2600_ALLOWED_PREFIXES seq 35 permit 10.73.184.0/21 le 32
-ip prefix-list PL_1:2600_ALLOWED_PREFIXES seq 40 permit 10.73.192.0/21 le 32
-ip prefix-list PL_1:2600_ALLOWED_PREFIXES seq 45 permit 10.73.225.0/24 le 32
-ip prefix-list PL_1:2600_ALLOWED_PREFIXES seq 50 permit 10.84.64.0/19 le 32
-ip prefix-list PL_1:2600_ALLOWED_PREFIXES seq 55 permit 10.93.184.0/21 le 32
-ip prefix-list PL_1:2600_ALLOWED_PREFIXES seq 60 permit 10.93.192.0/21 le 32
-ip prefix-list PL_1:2600_ALLOWED_PREFIXES seq 65 permit 10.93.225.0/24 le 32
-ip prefix-list PL_1:2600_ALLOWED_PREFIXES seq 70 permit 10.136.64.0/18 le 32
-ip prefix-list PL_1:2600_ALLOWED_PREFIXES seq 75 permit 10.137.104.0/21 le 32
-ip prefix-list PL_1:2600_ALLOWED_PREFIXES seq 80 permit 10.137.112.0/21 le 32
-ip prefix-list PL_1:2600_ALLOWED_PREFIXES seq 85 permit 10.177.96.0/21 le 32
-ip prefix-list PL_1:2600_ALLOWED_PREFIXES seq 90 permit 10.184.32.0/20 le 32
-ip prefix-list PL_1:2600_ALLOWED_PREFIXES seq 95 permit 10.189.192.0/20 le 32
-ip prefix-list PL_1:2600_ALLOWED_PREFIXES seq 100 permit 10.220.52.0/22 le 32
-ip prefix-list PL_1:2600_ALLOWED_PREFIXES seq 105 permit 10.220.116.0/22 le 32
-ip prefix-list PL_1:2600_ALLOWED_PREFIXES seq 110 permit 26.1.0.0/16 le 32
-ip prefix-list PL_1:2600_ALLOWED_PREFIXES seq 115 permit 26.26.0.0/16 le 32
+ip prefix-list PL_1:2600_ALLOWED_PREFIXES seq 5 permit 10.6.192.0/20 le 32
+ip prefix-list PL_1:2600_ALLOWED_PREFIXES seq 10 permit 10.7.64.0/22 le 32
+ip prefix-list PL_1:2600_ALLOWED_PREFIXES seq 15 permit 10.7.192.0/20 le 32
+ip prefix-list PL_1:2600_ALLOWED_PREFIXES seq 20 permit 10.42.48.0/22 le 32
+ip prefix-list PL_1:2600_ALLOWED_PREFIXES seq 25 permit 10.42.180.0/22 le 32
+ip prefix-list PL_1:2600_ALLOWED_PREFIXES seq 30 permit 10.73.184.0/21 le 32
+ip prefix-list PL_1:2600_ALLOWED_PREFIXES seq 35 permit 10.73.192.0/21 le 32
+ip prefix-list PL_1:2600_ALLOWED_PREFIXES seq 40 permit 10.73.225.0/24 le 32
+ip prefix-list PL_1:2600_ALLOWED_PREFIXES seq 45 permit 10.84.64.0/19 le 32
+ip prefix-list PL_1:2600_ALLOWED_PREFIXES seq 50 permit 10.93.184.0/21 le 32
+ip prefix-list PL_1:2600_ALLOWED_PREFIXES seq 55 permit 10.93.192.0/21 le 32
+ip prefix-list PL_1:2600_ALLOWED_PREFIXES seq 60 permit 10.93.225.0/24 le 32
+ip prefix-list PL_1:2600_ALLOWED_PREFIXES seq 65 permit 10.136.64.0/18 le 32
+ip prefix-list PL_1:2600_ALLOWED_PREFIXES seq 70 permit 10.137.104.0/21 le 32
+ip prefix-list PL_1:2600_ALLOWED_PREFIXES seq 75 permit 10.137.112.0/21 le 32
+ip prefix-list PL_1:2600_ALLOWED_PREFIXES seq 80 permit 10.177.96.0/21 le 32
+ip prefix-list PL_1:2600_ALLOWED_PREFIXES seq 85 permit 10.184.32.0/20 le 32
+ip prefix-list PL_1:2600_ALLOWED_PREFIXES seq 90 permit 10.189.192.0/20 le 32
+ip prefix-list PL_1:2600_ALLOWED_PREFIXES seq 95 permit 10.220.52.0/22 le 32
+ip prefix-list PL_1:2600_ALLOWED_PREFIXES seq 100 permit 10.220.116.0/22 le 32
 ip prefix-list PL_1:2600_ALLOWED_PREFIXES seq 500000 deny 0.0.0.0/0 le 32
 !
 ip prefix-list PL_1:2600_REMEDIATION_PREFIXES description PL_1:2600_REMEDIATION_PREFIXES TEST DESCRIPTION
-ip prefix-list PL_1:2600_REMEDIATION_PREFIXES seq 5 permit 1.1.1.1/32
-ip prefix-list PL_1:2600_REMEDIATION_PREFIXES seq 10 permit 6.6.6.6/32
-ip prefix-list PL_1:2600_REMEDIATION_PREFIXES seq 15 permit 10.6.224.0/20 le 32
-ip prefix-list PL_1:2600_REMEDIATION_PREFIXES seq 20 permit 10.6.240.0/21 le 32
-ip prefix-list PL_1:2600_REMEDIATION_PREFIXES seq 25 permit 10.7.72.0/22 le 32
-ip prefix-list PL_1:2600_REMEDIATION_PREFIXES seq 30 permit 10.7.96.0/20 le 32
-ip prefix-list PL_1:2600_REMEDIATION_PREFIXES seq 35 permit 10.7.216.0/22 le 32
-ip prefix-list PL_1:2600_REMEDIATION_PREFIXES seq 40 permit 10.7.224.0/20 le 32
-ip prefix-list PL_1:2600_REMEDIATION_PREFIXES seq 45 permit 10.110.24.0/21 le 32
-ip prefix-list PL_1:2600_REMEDIATION_PREFIXES seq 50 permit 10.110.88.0/21 le 32
-ip prefix-list PL_1:2600_REMEDIATION_PREFIXES seq 55 permit 10.110.144.0/23 le 32
-ip prefix-list PL_1:2600_REMEDIATION_PREFIXES seq 60 permit 10.129.0.0/16 le 32
-ip prefix-list PL_1:2600_REMEDIATION_PREFIXES seq 65 permit 10.161.168.0/22 le 32
-ip prefix-list PL_1:2600_REMEDIATION_PREFIXES seq 70 permit 10.165.32.0/21 le 32
-ip prefix-list PL_1:2600_REMEDIATION_PREFIXES seq 75 permit 10.166.128.0/19 le 32
-ip prefix-list PL_1:2600_REMEDIATION_PREFIXES seq 80 permit 10.166.160.0/20 le 32
-ip prefix-list PL_1:2600_REMEDIATION_PREFIXES seq 85 permit 10.166.176.0/21 le 32
-ip prefix-list PL_1:2600_REMEDIATION_PREFIXES seq 90 permit 10.166.192.0/18 le 32
-ip prefix-list PL_1:2600_REMEDIATION_PREFIXES seq 95 permit 10.167.0.0/21 le 32
-ip prefix-list PL_1:2600_REMEDIATION_PREFIXES seq 100 permit 10.167.8.0/22 le 32
-ip prefix-list PL_1:2600_REMEDIATION_PREFIXES seq 105 permit 10.181.192.0/20 le 32
-ip prefix-list PL_1:2600_REMEDIATION_PREFIXES seq 110 permit 12.1.0.0/16 le 32
-ip prefix-list PL_1:2600_REMEDIATION_PREFIXES seq 115 permit 12.2.0.0/18 le 32
-ip prefix-list PL_1:2600_REMEDIATION_PREFIXES seq 120 permit 12.12.0.0/16 le 32
+ip prefix-list PL_1:2600_REMEDIATION_PREFIXES seq 5 permit 6.6.6.6/32
+ip prefix-list PL_1:2600_REMEDIATION_PREFIXES seq 10 permit 10.6.224.0/20 le 32
+ip prefix-list PL_1:2600_REMEDIATION_PREFIXES seq 15 permit 10.6.240.0/21 le 32
+ip prefix-list PL_1:2600_REMEDIATION_PREFIXES seq 20 permit 10.7.72.0/22 le 32
+ip prefix-list PL_1:2600_REMEDIATION_PREFIXES seq 25 permit 10.7.96.0/20 le 32
+ip prefix-list PL_1:2600_REMEDIATION_PREFIXES seq 30 permit 10.7.216.0/22 le 32
+ip prefix-list PL_1:2600_REMEDIATION_PREFIXES seq 35 permit 10.7.224.0/20 le 32
+ip prefix-list PL_1:2600_REMEDIATION_PREFIXES seq 40 permit 10.110.24.0/21 le 32
+ip prefix-list PL_1:2600_REMEDIATION_PREFIXES seq 45 permit 10.110.88.0/21 le 32
+ip prefix-list PL_1:2600_REMEDIATION_PREFIXES seq 50 permit 10.110.144.0/23 le 32
+ip prefix-list PL_1:2600_REMEDIATION_PREFIXES seq 55 permit 10.129.0.0/16 le 32
+ip prefix-list PL_1:2600_REMEDIATION_PREFIXES seq 60 permit 10.161.168.0/22 le 32
+ip prefix-list PL_1:2600_REMEDIATION_PREFIXES seq 65 permit 10.165.32.0/21 le 32
+ip prefix-list PL_1:2600_REMEDIATION_PREFIXES seq 70 permit 10.166.128.0/19 le 32
+ip prefix-list PL_1:2600_REMEDIATION_PREFIXES seq 75 permit 10.166.160.0/20 le 32
+ip prefix-list PL_1:2600_REMEDIATION_PREFIXES seq 80 permit 10.166.176.0/21 le 32
+ip prefix-list PL_1:2600_REMEDIATION_PREFIXES seq 85 permit 10.166.192.0/18 le 32
+ip prefix-list PL_1:2600_REMEDIATION_PREFIXES seq 90 permit 10.167.0.0/21 le 32
+ip prefix-list PL_1:2600_REMEDIATION_PREFIXES seq 95 permit 10.167.8.0/22 le 32
+ip prefix-list PL_1:2600_REMEDIATION_PREFIXES seq 100 permit 10.181.192.0/20 le 32
 ip prefix-list PL_1:2600_REMEDIATION_PREFIXES seq 500000 deny 0.0.0.0/0 le 32
 !
 ip prefix-list PL_1:2700_ALLOWED_PREFIXES description PL_1:2700_ALLOWED_PREFIXES TEST DESCRIPTION
@@ -1103,10 +1079,13 @@ line vty 0 4
  login local
  transport input ssh
 !
-ntp server pool.ntp.org
+ntp server time-pnp.cisco.com
 !
 !
 !
 !
 !
+!
+pnp profile pnp_cco_profile
+ transport https host devicehelper.cisco.com port 443
 end
