@@ -1,16 +1,17 @@
 Building configuration...
 
-  
-Current configuration : 69825 bytes
+Current configuration : 70280 bytes
 !
-! Last configuration change at 23:11:47 UTC Tue Dec 6 2016 by ********
+! Last configuration change at 13:30:16 UTC Wed Dec 7 2016 by ********
 !
-version 15.6
+version 16.3
+service config
 service timestamps debug datetime msec
 service timestamps log datetime msec
-no service password-encryption
+no platform punt-keepalive disable-kernel-core
+platform console serial
 !
-hostname iosv-2
+hostname iosxe-2
 !
 boot-start-marker
 boot-end-marker
@@ -23,14 +24,6 @@ vrf definition MGMT
 !
 !
 no aaa new-model
-ethernet lmi ce
-!
-!
-!
-mmi polling-interval 60
-no mmi auto-configure
-no mmi pvc
-mmi snmp-timeout 180
 !
 !
 !
@@ -40,20 +33,88 @@ mmi snmp-timeout 180
 !
 !
 !
-!
-!
+
+
+
 ip domain name networkhobo.com
-ip cef
-no ipv6 cef
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+subscriber templating
+!
+!
 !
 multilink bundle-name authenticated
 !
 !
 !
 !
+!
+crypto pki trustpoint TP-self-signed-3593339053
+ enrollment selfsigned
+ subject-name cn=IOS-Self-Signed-Certificate-3593339053
+ revocation-check none
+ rsakeypair TP-self-signed-3593339053
+!
+!
+crypto pki certificate chain TP-self-signed-3593339053
+ certificate self-signed 01
+  30820330 30820218 A0030201 02020101 300D0609 2A864886 F70D0101 05050030 
+  31312F30 2D060355 04031326 494F532D 53656C66 2D536967 6E65642D 43657274 
+  69666963 6174652D 33353933 33333930 3533301E 170D3136 31323034 31363031 
+  34345A17 0D323030 31303130 30303030 305A3031 312F302D 06035504 03132649 
+  4F532D53 656C662D 5369676E 65642D43 65727469 66696361 74652D33 35393333 
+  33393035 33308201 22300D06 092A8648 86F70D01 01010500 0382010F 00308201 
+  0A028201 0100B0E4 D8A55D22 9320C4D2 22960E84 04E45D5D 3B724322 15B0DD75 
+  5918A68B D97B99C4 70878910 7944CC7C 2B840B9E A41BA78E 417E40E0 6AC0C7A0 
+  88A715B9 0416E8DF 1729BB8B 9A8A5A65 5C80AE46 0627AFC5 7B60B97B 60250C70 
+  81788DCE B1CE1AB7 6692BD4F 47C01626 742AF566 69EA26B1 B5FE3640 0E853ABF 
+  0D9B317C E525553E E2CCD443 950C3E6D B65C468B 8D21BCBA 176EDB6B BFDD1CA8 
+  EB26C8C4 B669D25C 2DF09070 3DCE3F2B 703BDA27 FB7F7D39 FDFAC572 A67C74CA 
+  E4B49B26 B12A6D71 C75B70F1 4C550930 E4868E61 86504CEF 8DAE3377 477F2E27 
+  CE843ECC A3F0B4DC 239E9AE7 33161634 756CCB14 9060907D 855675D9 F621A50D 
+  86C0AF1A 358D0203 010001A3 53305130 0F060355 1D130101 FF040530 030101FF 
+  301F0603 551D2304 18301680 14D6EC2C 239D64FC 8C1A4078 0337C410 DD620008 
+  59301D06 03551D0E 04160414 D6EC2C23 9D64FC8C 1A407803 37C410DD 62000859 
+  300D0609 2A864886 F70D0101 05050003 82010100 584256BF F7CEDBBA 63CEA1D8 
+  534BC845 1FFAC6DA DC907286 240FD4F7 FB49FBC6 73DEF9EA 15260FBE DEBACB66 
+  17808C90 F904EE6F FE0EFFB5 4C665674 9BB97CAE E2AE4389 6D6209B4 30E69D2D 
+  F71FC6B1 259E6E7E BCB9F49A 24B54BF2 96688BFF D67DFF79 28CA5CCE 8E45C277 
+  289B1F3E 832EE1CA 18418810 A64D88C0 6D4C0FA7 D8908E29 81B453DC F315B56A 
+  8D5C6771 1F5516AC 827ACBF5 6ABE0F23 961EFF2D D92BA12C 3469D68F 1F37E9DF 
+  77959B39 8B24EA24 91D2E42A 5CED413C 49BC5253 1BA14DC0 79D656B8 53C4B5C3 
+  AB3ED70D 5C1DB5A2 45F7E312 617F8170 38D96FAA 721AEF0C F568A029 B89BE28B 
+  298D7281 8B67465E FDE92D37 CC967F74 4AED01D6
+  	quit
+
+
+!
+!
+!
+!
+!
+!
+!
+license udi pid CSR1000V sn 9609P4TA6QA
+diagnostic bootup level minimal
+!
+spanning-tree extend system-id
+!
+!
 username ******** privilege 15 password 0 ********
 !
 redundancy
+!
+!
+!
+!
 !
 !
 ! 
@@ -69,41 +130,45 @@ redundancy
 !
 !
 !
-interface GigabitEthernet0/0
+! 
+! 
+! 
+! 
+! 
+! 
+!
+!
+interface GigabitEthernet1
  vrf forwarding MGMT
- ip address 172.23.1.55 255.255.255.0
- duplex auto
- speed auto
- media-type rj45
+ ip address dhcp
+ negotiation auto
+ no mop enabled
+ no mop sysid
 !
-interface GigabitEthernet0/1
+interface GigabitEthernet2
  no ip address
  shutdown
- duplex auto
- speed auto
- media-type rj45
+ negotiation auto
+ no mop enabled
+ no mop sysid
 !
-interface GigabitEthernet0/2
+interface GigabitEthernet3
  no ip address
  shutdown
- duplex auto
- speed auto
- media-type rj45
+ negotiation auto
+ no mop enabled
+ no mop sysid
 !
-interface GigabitEthernet0/3
- no ip address
- shutdown
- duplex auto
- speed auto
- media-type rj45
+!
+virtual-service csr_mgmt
 !
 ip forward-protocol nd
+ip http server
+ip http authentication local
+ip http secure-server
 !
-!
-no ip http server
-no ip http secure-server
 ip route vrf MGMT 0.0.0.0 0.0.0.0 172.23.1.1
-ip ssh version 2
+!
 !
 !
 ip prefix-list PL_1:1000_ALLOWED_PREFIXES description PL_1:1000_ALLOWED_PREFIXES TEST DESCRIPTION
@@ -981,42 +1046,28 @@ ip prefix-list PL_1:2700_REMEDIATION_PREFIXES seq 500000 deny 0.0.0.0/0 le 32
 !
 !
 !
+!
 control-plane
 !
-banner exec ^C
-**************************************************************************
-* IOSv is strictly limited to use for evaluation, demonstration and IOS  *
-* education. IOSv is provided as-is and is not supported by Cisco's      *
-* Technical Advisory Center. Any use or disclosure, in whole or in part, *
-* of the IOSv Software or Documentation to any third party for any       *
-* purposes is expressly prohibited except as otherwise authorized by     *
-* Cisco in writing.                                                      *
-**************************************************************************^C
-banner incoming ^C
-**************************************************************************
-* IOSv is strictly limited to use for evaluation, demonstration and IOS  *
-* education. IOSv is provided as-is and is not supported by Cisco's      *
-* Technical Advisory Center. Any use or disclosure, in whole or in part, *
-* of the IOSv Software or Documentation to any third party for any       *
-* purposes is expressly prohibited except as otherwise authorized by     *
-* Cisco in writing.                                                      *
-**************************************************************************^C
-banner login ^C
-**************************************************************************
-* IOSv is strictly limited to use for evaluation, demonstration and IOS  *
-* education. IOSv is provided as-is and is not supported by Cisco's      *
-* Technical Advisory Center. Any use or disclosure, in whole or in part, *
-* of the IOSv Software or Documentation to any third party for any       *
-* purposes is expressly prohibited except as otherwise authorized by     *
-* Cisco in writing.                                                      *
-**************************************************************************^C
+ !
+ !
+ !
+ !
+!
+!
+!
+!
 !
 line con 0
-line aux 0
+ stopbits 1
 line vty 0 4
  login local
  transport input ssh
 !
-no scheduler allocate
+ntp server pool.ntp.org
+!
+!
+!
+!
 !
 end
