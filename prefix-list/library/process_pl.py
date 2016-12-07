@@ -104,8 +104,6 @@ def process_new(original_yaml):
     remediation_vrfs = ['1:1200', '1:1500', '1:1600', '1:2100', '1:2600']
     output_dict = {}
     output_yaml = {}
-    #output_yaml['allowed'] = {}
-    #output_yaml['remediation'] = {}
 
     with open("pl_changes.yaml", 'r') as stream:
         try:
@@ -151,7 +149,6 @@ def process_new(original_yaml):
                 for vrf, blank in change_yaml[top_level_key][list_type].items():
                     temp_ip_set = netaddr.IPSet()
                     temp_list = change_yaml[top_level_key][list_type][vrf]
-                    #print(temp_list)
                     for i, ip_address in enumerate(original_yaml[list_type][vrf]['prefix']):
                         temp_ip_set.add(ip_address)
                     for i, ip_address in enumerate(temp_list):
